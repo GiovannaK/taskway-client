@@ -5,7 +5,7 @@ import useStyles from './styles';
 const Layout = ({ children }) => {
   const classes = useStyles();
   return (
-    <Container>
+    <Container className={classes.container}>
       { children }
     </Container>
   );
