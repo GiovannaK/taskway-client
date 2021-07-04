@@ -15,6 +15,7 @@ import useStyles from '../styles/profile';
 import Layout from '../components/Layout';
 import { ProfileInfoCard } from '../components/Profile/ProfileInfoCard';
 import { ProfileEditForm } from '../components/Profile/ProfileEditForm';
+import { ProfileSection } from '../components/Profile/ProfileSection';
 
 const profile = () => {
   const classes = useStyles();
@@ -28,13 +29,7 @@ const profile = () => {
             <Toolbar />
             <Grid container spacing={1}>
               <ProfileEditForm />
-              <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                <Card variant="outlined">
-                  <CardContent>
-                    dfokgj
-                  </CardContent>
-                </Card>
-              </Grid>
+              <ProfileSection />
             </Grid>
           </Box>
         </Layout>

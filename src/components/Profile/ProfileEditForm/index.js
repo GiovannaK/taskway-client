@@ -92,7 +92,7 @@ export const ProfileEditForm = () => {
               </Grid>
             </Grid>
             <Toolbar />
-            <Button variant="outlined" className={classes.button}>
+            <Button type="submit" variant="outlined" className={classes.button}>
               Atualizar
             </Button>
           </form>

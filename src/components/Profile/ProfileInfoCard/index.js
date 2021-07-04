@@ -17,8 +17,6 @@ export const ProfileInfoCard = () => {
         md={12}
         lg={12}
         xl={12}
-        align="center"
-        justify="center"
       >
         <Card className={classes.card} variant="outlined">
           <Grid container justify="center" alignItems="center">
