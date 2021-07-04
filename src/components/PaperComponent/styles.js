@@ -1,7 +1,8 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  container: {
+  paperRoot: {
+    background: theme.palette.primary.light,
     minHeight: '100vh',
   },
 }));

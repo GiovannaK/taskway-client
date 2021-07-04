@@ -12,7 +12,7 @@ const theme = createMuiTheme({
       dark: '#52b69a',
     },
     secondary: {
-      main: '#361999',
+      main: '#ffffff',
       light: '#ff9100',
       dark: '#7431C9',
       opacity: 'rgba(221,135,61,0.4)',
