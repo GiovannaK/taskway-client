@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     color: theme.palette.secondary.dark,
   },
+  card: {
+    backgroundColor: theme.palette.secondary.main,
+  },
 }));
 
 export default useStyles;

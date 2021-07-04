@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
   typography: {
     color: theme.palette.secondary.light,
   },
+  card: {
+    backgroundColor: theme.palette.secondary.main,
+  },
 }));
 
 export default useStyles;

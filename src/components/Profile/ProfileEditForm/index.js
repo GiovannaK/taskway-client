@@ -18,7 +18,7 @@ export const ProfileEditForm = () => {
   const classes = useStyles();
   return (
     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-      <Card variant="outlined">
+      <Card variant="outlined" className={classes.card}>
         <CardContent>
           <Typography
             variant="h6"
