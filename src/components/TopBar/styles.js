@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   AppBar: {
     width: '100%',
-    background: theme.palette.primary.light,
+    background: theme.palette.secondary.main,
   },
   logo: {
     fontWeight: 'bold',
