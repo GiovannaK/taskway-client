@@ -7,6 +7,11 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(2),
     backgroundColor: theme.palette.secondary.light,
   },
+  title: {
+    color: theme.palette.secondary.light,
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+  },
 }));
 
 export default useStyles;
