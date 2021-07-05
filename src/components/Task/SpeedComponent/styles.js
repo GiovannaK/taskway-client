@@ -1,11 +1,13 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  fab: {
+  speedDial: {
     position: 'fixed',
     bottom: theme.spacing(2),
     right: theme.spacing(2),
-    backgroundColor: theme.palette.secondary.light,
+  },
+  icon: {
+    color: theme.palette.secondary.light,
   },
 }));
 
