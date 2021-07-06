@@ -4,7 +4,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     textTransform: 'uppercase',
     fontWeight: 500,
-    color: theme.palette.primary.dark,
+    color: theme.palette.secondary.dark,
   },
   card: {
     backgroundColor: theme.palette.secondary.main,

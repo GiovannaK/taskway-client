@@ -15,7 +15,7 @@ const workspaces = () => {
       <PaperComponent>
         <TopBar />
         <Layout>
-          <Box className={classes.box}>
+          <Box pt={10}>
             <Typography
               align="center"
               variant="h5"
