@@ -16,10 +16,12 @@ import {
 } from '@material-ui/pickers';
 import 'moment/locale/pt-br';
 import moment from 'moment';
+import { GridComponent } from '../components/GridComponent';
 import { PaperComponent } from '../components/PaperComponent';
 import { TopBar } from '../components/TopBar';
 import useStyles from '../styles/updateTask';
 import Layout from '../components/Layout';
+import { SendFile } from '../components/SendFile';
 
 const updateTask = () => {
   const classes = useStyles();
@@ -35,7 +37,7 @@ const updateTask = () => {
       <Layout>
         <Box pt={8}>
           <Grid container align="center" justify="center">
-            <Grid item xs={12} sm={12} md={10} lg={10} xl={10}>
+            <Grid item xs={12} sm={12} md={12} lg={8} xl={8}>
               <Card className={classes.card}>
                 <CardContent>
                   <Toolbar />
@@ -182,9 +184,11 @@ const updateTask = () => {
                       </Grid>
                     </Grid>
                   </form>
+                  <SendFile />
                 </CardContent>
               </Card>
             </Grid>
+            <Toolbar />
           </Grid>
         </Box>
       </Layout>
