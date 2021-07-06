@@ -1,6 +1,7 @@
 import {
   Typography, Box, Toolbar, Grid,
 } from '@material-ui/core';
+import { motion } from 'framer-motion';
 import { GridComponent } from '../components/GridComponent';
 import Layout from '../components/Layout';
 import { PaperComponent } from '../components/PaperComponent';
@@ -16,13 +17,18 @@ const workspaces = () => {
         <TopBar />
         <Layout>
           <Box pt={10}>
-            <Typography
-              align="center"
-              variant="h5"
-              className={classes.title}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 2 }}
             >
-              Meus Workspaces
-            </Typography>
+              <Typography
+                align="center"
+                variant="h5"
+                className={classes.title}
+              >
+                Meus Workspaces
+              </Typography>
+            </motion.div>
             <Toolbar />
             <GridComponent>
               <Grid item align="center" xs={12} sm={6} md={6} lg={4} xl={4}>
@@ -36,13 +42,18 @@ const workspaces = () => {
               </Grid>
             </GridComponent>
             <Toolbar />
-            <Typography
-              align="center"
-              variant="h5"
-              className={classes.title}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 2 }}
             >
-              Membro em
-            </Typography>
+              <Typography
+                align="center"
+                variant="h5"
+                className={classes.title}
+              >
+                Membro em
+              </Typography>
+            </motion.div>
             <Toolbar />
             <GridComponent>
               <Grid item align="center" xs={12} sm={6} md={6} lg={4} xl={4}>
