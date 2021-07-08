@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
   button: {
     color: theme.palette.secondary.dark,
   },
+  description: {
+    color: theme.palette.text.primary,
+  },
 }));
 
 export default useStyles;

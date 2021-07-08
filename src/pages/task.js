@@ -24,6 +24,7 @@ const task = () => {
               <TaskCard />
               <Toolbar />
               <CommentsCard />
+              <Toolbar />
             </Grid>
           </Grid>
         </Box>

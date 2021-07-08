@@ -51,7 +51,7 @@ export const TaskCard = () => {
         </Grid>
         <Divider />
         <Box pt={2} pb={3}>
-          <Typography variant="h6" align="left">
+          <Typography variant="h6" align="left" className={classes.description}>
             Lorem ipsum dolor sit amet,
             consectetur adipisicing elit.
             Commodi temporibus quaerat iusto
