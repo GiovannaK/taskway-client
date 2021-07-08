@@ -1,19 +1,16 @@
 import {
-  Hidden,
-  Typography,
-  Box, Card, CardContent, Grid, TextField, Toolbar, Button,
+  Box, Button, Card, CardContent, Grid, Hidden, TextField, Toolbar, Typography,
 } from '@material-ui/core';
-
 import React from 'react';
 import Layout from '../components/Layout';
 import { LoginPaper } from '../components/LoginPaper';
-import useStyles from '../styles/login';
+import useStyles from '../styles/register';
 
-const login = () => {
+const register = () => {
   const classes = useStyles();
   return (
     <LoginPaper>
-      <img src="animated_wave.svg" alt="waves" className={classes.images} />
+      <img src="animated_wave.svg" alt="blue waves" className={classes.images} />
       <Layout>
         <Box pt={5}>
           <Grid container align="center" justify="center">
@@ -22,7 +19,7 @@ const login = () => {
                 <Card className={classes.card} square>
                   <CardContent>
                     <Toolbar />
-                    <img src="done.png" alt="svg login" className={classes.svg} />
+                    <img src="register.png" alt="svg login" className={classes.svg} />
                   </CardContent>
                 </Card>
               </Grid>
@@ -35,9 +32,33 @@ const login = () => {
                     variant="h3"
                     className={classes.title}
                   >
-                    Login
+                    Registre-se
                   </Typography>
                   <form>
+                    <TextField
+                      required
+                      id="firstName"
+                      label="Primeiro Nome"
+                      type="text"
+                      placeholder="Seu primeiro nome..."
+                      variant="outlined"
+                      className={classes.input}
+                      InputLabelProps={{
+                        className: classes.label,
+                      }}
+                    />
+                    <TextField
+                      required
+                      id="lastName"
+                      label="Último Nome"
+                      type="text"
+                      placeholder="Seu último nome..."
+                      variant="outlined"
+                      className={classes.input}
+                      InputLabelProps={{
+                        className: classes.label,
+                      }}
+                    />
                     <TextField
                       required
                       id="email"
@@ -71,10 +92,6 @@ const login = () => {
                         Login
                       </Typography>
                     </Button>
-                    <Hidden smDown>
-                      <Toolbar />
-                      <img src="task.svg" alt="task" className={classes.svgButton} />
-                    </Hidden>
                   </form>
                   <Toolbar />
                   <Grid container spacing={2}>
@@ -85,7 +102,7 @@ const login = () => {
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                       <Button className={classes.buttons}>
-                        Não uma tem conta?
+                        Já tem conta?
                       </Button>
                     </Grid>
                   </Grid>
@@ -99,4 +116,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default register;
