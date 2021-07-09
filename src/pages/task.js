@@ -17,7 +17,7 @@ const task = () => {
   return (
     <PaperComponent>
       <TopBar />
-      <Layout>
+      <Layout title="Taskway | Tarefa">
         <Box pt={10}>
           <Grid container align="center" justify="center">
             <Grid item xs={12} sm={12} md={12} lg={10} xl={8}>

@@ -15,7 +15,7 @@ const workspaces = () => {
     <>
       <PaperComponent>
         <TopBar />
-        <Layout>
+        <Layout title="Taskway | Workspaces">
           <Box pt={10}>
             <motion.div
               animate={{ rotate: 360 }}

@@ -14,7 +14,7 @@ const login = () => {
   return (
     <LoginPaper>
       <img src="animated_wave.svg" alt="waves" className={classes.images} />
-      <Layout>
+      <Layout title="Taskway | Login">
         <Box pt={5}>
           <Grid container align="center" justify="center">
             <Hidden mdDown>

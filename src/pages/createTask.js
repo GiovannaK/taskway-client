@@ -33,7 +33,7 @@ const createTask = () => {
   return (
     <PaperComponent>
       <TopBar />
-      <Layout>
+      <Layout title="Taskway | Criar Tarefa">
         <Box pt={8}>
           <Grid container align="center" justify="center">
             <Grid item xs={12} sm={12} md={12} lg={8} xl={8}>
@@ -180,6 +180,7 @@ const createTask = () => {
                         >
                           Adicionar
                         </Button>
+                        <Toolbar />
                       </Grid>
                     </Grid>
                   </form>

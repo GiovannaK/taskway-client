@@ -11,7 +11,7 @@ const register = () => {
   return (
     <LoginPaper>
       <img src="animated_wave.svg" alt="blue waves" className={classes.images} />
-      <Layout>
+      <Layout title="Taskway | Registre-se">
         <Box pt={5}>
           <Grid container align="center" justify="center">
             <Hidden mdDown>

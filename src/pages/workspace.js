@@ -13,7 +13,7 @@ const workspace = () => {
   return (
     <PaperComponent>
       <TopBar />
-      <Layout>
+      <Layout title="Taskway | Workspace">
         <Box pt={10}>
           <Typography variant="h5" align="center" className={classes.title}>
             Workspace Title
