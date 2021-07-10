@@ -3,8 +3,10 @@ import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ApolloProvider } from '@apollo/client';
+import { ToastContainer, Slide } from 'react-toastify';
 import theme from '../theme';
 import { client } from '../services/ApolloClient';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
@@ -27,6 +29,17 @@ export default function MyApp(props) {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Component {...pageProps} />
+          <ToastContainer
+            position="bottom-left"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
         </ThemeProvider>
       </ApolloProvider>
     </>

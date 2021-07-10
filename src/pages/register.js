@@ -1,13 +1,58 @@
+/* eslint-disable no-useless-return */
+import { gql, useMutation } from '@apollo/client';
 import {
   Box, Button, Card, CardContent, Grid, Hidden, TextField, Toolbar, Typography,
 } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import Layout from '../components/Layout';
 import { LoginPaper } from '../components/LoginPaper';
 import useStyles from '../styles/register';
+import { registerValidation } from '../utils/registerValidation';
+
+const REGISTER_USER = gql`
+  mutation userRegister($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
+    userRegister(firstName: $firstName, lastName: $lastName, email: $email, password: $password) {
+      id
+    }
+  }
+`;
 
 const register = () => {
   const classes = useStyles();
+  const [variables, setVariables] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  });
+
+  const [registerUser, { loading }] = useMutation(REGISTER_USER, {
+    update(_, __) {
+      toast.info(`Um e-mail de ativação foi enviado para ${variables.email}`);
+    },
+    onError(err) {
+      toast.error('Não foi possível registrar usuário');
+    },
+  });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const invalid = registerValidation(
+      variables.firstName,
+      variables.lastName,
+      variables.email,
+      variables.password,
+    );
+
+    if (invalid) {
+      return;
+    }
+
+    registerUser({ variables });
+  };
+
   return (
     <LoginPaper>
       <img src="animated_wave.svg" alt="blue waves" className={classes.images} />
@@ -34,7 +79,7 @@ const register = () => {
                   >
                     Registre-se
                   </Typography>
-                  <form>
+                  <form onSubmit={onSubmit}>
                     <TextField
                       required
                       id="firstName"
@@ -46,6 +91,8 @@ const register = () => {
                       InputLabelProps={{
                         className: classes.label,
                       }}
+                      value={variables.firstName}
+                      onChange={(e) => setVariables({ ...variables, firstName: e.target.value })}
                     />
                     <TextField
                       required
@@ -58,6 +105,8 @@ const register = () => {
                       InputLabelProps={{
                         className: classes.label,
                       }}
+                      value={variables.lastName}
+                      onChange={(e) => setVariables({ ...variables, lastName: e.target.value })}
                     />
                     <TextField
                       required
@@ -70,6 +119,8 @@ const register = () => {
                       InputLabelProps={{
                         className: classes.label,
                       }}
+                      value={variables.email}
+                      onChange={(e) => setVariables({ ...variables, email: e.target.value })}
                     />
                     <TextField
                       required
@@ -82,14 +133,17 @@ const register = () => {
                       InputLabelProps={{
                         className: classes.label,
                       }}
+                      value={variables.password}
+                      onChange={(e) => setVariables({ ...variables, password: e.target.value })}
                     />
                     <Button
                       type="submit"
                       className={classes.button}
                       variant="outlined"
+                      disabled={loading}
                     >
                       <Typography variant="h6">
-                        Login
+                        {loading ? '...Enviando' : 'Registrar'}
                       </Typography>
                     </Button>
                   </form>
