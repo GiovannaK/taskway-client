@@ -8,14 +8,14 @@ import {
 import React from 'react';
 import Layout from '../components/Layout';
 import { LoginPaper } from '../components/LoginPaper';
-import useStyles from '../styles/forgotPassword';
+import useStyles from '../styles/activateAccount';
 
-const forgotPassword = () => {
+const activateAccount = () => {
   const classes = useStyles();
   return (
     <LoginPaper>
       <img src="animated_wave.svg" alt="waves" className={classes.images} />
-      <Layout title="Taskway | Esqueci a Senha">
+      <Layout title="Taskway | Ativar conta">
         <Box pt={5}>
           <Grid container align="center" justify="center">
             <Hidden mdDown>
@@ -23,7 +23,7 @@ const forgotPassword = () => {
                 <Card className={classes.card} square>
                   <CardContent>
                     <Toolbar />
-                    <img src="mail.svg" alt="svg esqueci a senha" className={classes.svg} />
+                    <img src="confirm.svg" alt="svg confirmar a senha" className={classes.svg} />
                   </CardContent>
                 </Card>
               </Grid>
@@ -36,28 +36,16 @@ const forgotPassword = () => {
                     variant="h3"
                     className={classes.title}
                   >
-                    Esqueci a senha
+                    Ativar minha conta
                   </Typography>
                   <form>
-                    <TextField
-                      required
-                      id="email"
-                      label="E-mail"
-                      type="email"
-                      placeholder="Seu e-mail..."
-                      variant="outlined"
-                      className={classes.input}
-                      InputLabelProps={{
-                        className: classes.label,
-                      }}
-                    />
                     <Button
                       type="submit"
                       className={classes.button}
                       variant="outlined"
                     >
                       <Typography variant="h6">
-                        Enviar
+                        Ativar
                       </Typography>
                     </Button>
                     <Hidden smDown>
@@ -69,7 +57,7 @@ const forgotPassword = () => {
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                       <Button className={classes.buttons}>
-                        Lembrei minha senha
+                        Já tenho uma conta
                       </Button>
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
@@ -88,4 +76,4 @@ const forgotPassword = () => {
   );
 };
 
-export default forgotPassword;
+export default activateAccount;

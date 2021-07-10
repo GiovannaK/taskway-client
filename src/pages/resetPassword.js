@@ -15,7 +15,7 @@ const resetPassword = () => {
   return (
     <LoginPaper>
       <img src="animated_wave.svg" alt="waves" className={classes.images} />
-      <Layout title="Taskway | Login">
+      <Layout title="Taskway | Alterar senha">
         <Box pt={5}>
           <Grid container align="center" justify="center">
             <Hidden mdDown>
