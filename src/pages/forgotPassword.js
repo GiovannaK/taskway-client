@@ -6,6 +6,7 @@ import {
 } from '@material-ui/core';
 
 import React from 'react';
+import Link from 'next/link';
 import Layout from '../components/Layout';
 import { LoginPaper } from '../components/LoginPaper';
 import useStyles from '../styles/forgotPassword';
@@ -68,14 +69,18 @@ const forgotPassword = () => {
                   <Toolbar />
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                      <Button className={classes.buttons}>
-                        Lembrei minha senha
-                      </Button>
+                      <Link href="/login">
+                        <Button className={classes.buttons}>
+                          Lembrei minha senha
+                        </Button>
+                      </Link>
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                      <Button className={classes.buttons}>
-                        Não uma tem conta?
-                      </Button>
+                      <Link href="/register">
+                        <Button className={classes.buttons}>
+                          Não uma tem conta?
+                        </Button>
+                      </Link>
                     </Grid>
                   </Grid>
                 </CardContent>

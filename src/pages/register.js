@@ -5,6 +5,7 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import Link from 'next/link';
 import Layout from '../components/Layout';
 import { LoginPaper } from '../components/LoginPaper';
 import useStyles from '../styles/register';
@@ -150,14 +151,18 @@ const register = () => {
                   <Toolbar />
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                      <Button className={classes.buttons}>
-                        Esqueceu a senha?
-                      </Button>
+                      <Link href="/forgotPassword">
+                        <Button className={classes.buttons}>
+                          Esqueceu a senha?
+                        </Button>
+                      </Link>
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                      <Button className={classes.buttons}>
-                        Já tem conta?
-                      </Button>
+                      <Link href="/login">
+                        <Button className={classes.buttons}>
+                          Já tem conta?
+                        </Button>
+                      </Link>
                     </Grid>
                   </Grid>
                 </CardContent>
