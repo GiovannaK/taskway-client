@@ -8,6 +8,7 @@ import { PaperComponent } from '../components/PaperComponent';
 import { TopBar } from '../components/TopBar';
 import { WorkspaceCard } from '../components/WorkspaceCard';
 import useStyles from '../styles/workspace';
+import withAuth from '../utils/withAuth';
 
 const workspaces = () => {
   const classes = useStyles();
@@ -17,18 +18,13 @@ const workspaces = () => {
         <TopBar />
         <Layout title="Taskway | Workspaces">
           <Box pt={10}>
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2 }}
+            <Typography
+              align="center"
+              variant="h5"
+              className={classes.title}
             >
-              <Typography
-                align="center"
-                variant="h5"
-                className={classes.title}
-              >
-                Meus Workspaces
-              </Typography>
-            </motion.div>
+              Meus Workspaces
+            </Typography>
             <Toolbar />
             <GridComponent>
               <Grid item align="center" xs={12} sm={6} md={6} lg={4} xl={4}>
@@ -42,18 +38,13 @@ const workspaces = () => {
               </Grid>
             </GridComponent>
             <Toolbar />
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2 }}
+            <Typography
+              align="center"
+              variant="h5"
+              className={classes.title}
             >
-              <Typography
-                align="center"
-                variant="h5"
-                className={classes.title}
-              >
-                Membro em
-              </Typography>
-            </motion.div>
+              Membro em
+            </Typography>
             <Toolbar />
             <GridComponent>
               <Grid item align="center" xs={12} sm={6} md={6} lg={4} xl={4}>
@@ -70,4 +61,4 @@ const workspaces = () => {
   );
 };
 
-export default workspaces;
+export default withAuth(workspaces);

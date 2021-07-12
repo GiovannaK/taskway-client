@@ -4,14 +4,58 @@ import {
   Box, Card, CardContent, Grid, TextField, Toolbar, Button,
 } from '@material-ui/core';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { gql, useMutation } from '@apollo/client';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
 import { LoginPaper } from '../components/LoginPaper';
 import useStyles from '../styles/login';
+import { loginValidation } from '../utils/loginValidation';
+
+const LOGIN_USER = gql`
+  mutation userLogin($email: String!, $password: String!) {
+    userLogin(email: $email, password: $password) {
+      id
+      token
+    }
+  }
+`;
 
 const login = () => {
   const classes = useStyles();
+  const router = useRouter();
+  const [variables, setVariables] = useState({
+    email: '',
+    password: '',
+  });
+
+  const [loginUser, { loading }] = useMutation(LOGIN_USER, {
+    update(_, __) {
+      router.push('/workspaces');
+    },
+    onError(err) {
+      toast.error('Não foi possível fazer o login do usuário');
+      console.log(err);
+    },
+  });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const hasInvalidFields = loginValidation(
+      variables.email,
+      variables.password,
+    );
+
+    if (hasInvalidFields) {
+      return;
+    }
+
+    loginUser({ variables });
+  };
+
   return (
     <LoginPaper>
       <img src="animated_wave.svg" alt="waves" className={classes.images} />
@@ -38,7 +82,7 @@ const login = () => {
                   >
                     Login
                   </Typography>
-                  <form>
+                  <form onSubmit={onSubmit}>
                     <TextField
                       required
                       id="email"
@@ -50,6 +94,8 @@ const login = () => {
                       InputLabelProps={{
                         className: classes.label,
                       }}
+                      value={variables.email}
+                      onChange={(e) => setVariables({ ...variables, email: e.target.value })}
                     />
                     <TextField
                       required
@@ -62,14 +108,17 @@ const login = () => {
                       InputLabelProps={{
                         className: classes.label,
                       }}
+                      value={variables.password}
+                      onChange={(e) => setVariables({ ...variables, password: e.target.value })}
                     />
                     <Button
                       type="submit"
                       className={classes.button}
                       variant="outlined"
+                      disabled={loading}
                     >
                       <Typography variant="h6">
-                        Login
+                        {loading ? 'Carregando...' : 'Login'}
                       </Typography>
                     </Button>
                     <Hidden smDown>
