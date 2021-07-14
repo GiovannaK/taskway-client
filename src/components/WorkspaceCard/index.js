@@ -21,10 +21,12 @@ export const WorkspaceCard = ({ workspace }) => {
     <Card className={classes.card}>
       <CardHeader
         avatar={(
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            U
-          </Avatar>
-                  )}
+          <Avatar
+            aria-label="recipe"
+            className={classes.avatar}
+            src={workspace.owner.profile.imageUrl ? workspace.owner.profile.imageUrl : ''}
+          />
+        )}
         action={(
           <IconButton
             aria-label="settings"
@@ -39,11 +41,20 @@ export const WorkspaceCard = ({ workspace }) => {
       />
       <CardContent>
         <Box display="flex" justifyContent="center">
-          <AvatarGroup max={5}>
-            <Avatar>A</Avatar>
-            <Avatar>B</Avatar>
-            <Avatar>C</Avatar>
-          </AvatarGroup>
+          {!workspace.users.length ? (
+            <Typography variant="h6" className={classes.member}>
+              Nenhum membro
+            </Typography>
+          ) : (
+
+            <AvatarGroup max={5}>
+              {workspace.users.map((user) => (
+                <Avatar src={user.profile.imageUrl ? user.profile.imageUrl
+                  : ''}
+                />
+              ))}
+            </AvatarGroup>
+          )}
         </Box>
       </CardContent>
       <Divider />

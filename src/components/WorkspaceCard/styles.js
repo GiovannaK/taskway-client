@@ -13,6 +13,14 @@ const useStyles = makeStyles((theme) => ({
   card: {
     backgroundColor: theme.palette.secondary.main,
   },
+  cardHeader: {
+    minHeight: 150,
+  },
+  member: {
+    color: theme.palette.secondary.dark,
+    fontWeight: 400,
+    paddingBottom: theme.spacing(1),
+  },
 }));
 
 export default useStyles;

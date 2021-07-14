@@ -1,5 +1,5 @@
 import {
-  Typography, Box, Toolbar, Grid,
+  Typography, Box, Toolbar, Grid, Hidden,
 } from '@material-ui/core';
 import { motion } from 'framer-motion';
 import { gql, useQuery } from '@apollo/client';
@@ -17,11 +17,24 @@ import { WorkspaceMemberCard } from '../components/WorkspaceMemberCard';
 const WORKSPACES_QUERY = gql`
   query workspaces {
     workspaces{
-      id
-      title
-      createdAt
-      updatedAt
+    id
+    title
+    createdAt
+    users{
+      email
+      firstName
+      profile{
+        imageUrl
+      }
     }
+    owner {
+      profile{
+        id
+        bio
+        imageUrl
+      }
+    }
+  }
 }
 `;
 
@@ -36,37 +49,52 @@ const workspaces = () => {
     toast.error('Não foi possível mostrar seus workspaces');
   }
 
+  console.log(allWorkspaces);
+
   return (
     <>
       <PaperComponent>
+        <Hidden mdDown>
+          <img src="waves.png" alt="wave" className={classes.image} />
+        </Hidden>
         <TopBar />
         <Layout title="Taskway | Workspaces">
           {loading ? (<Loading />) : (
-
             <Box pt={10}>
               <Typography
                 align="center"
                 variant="h5"
                 className={classes.title}
               >
-                Meus Workspaces
+                {allWorkspaces.length ? 'Meus Workspaces' : 'Você ainda não tem workspaces'}
               </Typography>
               <Toolbar />
               <GridComponent>
-                {allWorkspaces.map((workspace) => (
-                  <Grid
-                    item
-                    align="center"
-                    xs={12}
-                    sm={6}
-                    md={6}
-                    lg={4}
-                    xl={4}
-                    key={workspace.id}
-                  >
-                    <WorkspaceCard workspace={workspace} />
+                {allWorkspaces.length ? (
+                  allWorkspaces.map((workspace) => (
+                    <Grid
+                      item
+                      align="center"
+                      xs={12}
+                      sm={6}
+                      md={6}
+                      lg={4}
+                      xl={4}
+                      key={workspace.id}
+                    >
+                      <WorkspaceCard workspace={workspace} />
+                    </Grid>
+                  ))
+
+                ) : (
+                  <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                    <img
+                      src="noWorkspace.svg"
+                      alt="Você não tem workspaces"
+                      className={classes.svg}
+                    />
                   </Grid>
-                ))}
+                )}
               </GridComponent>
               <Toolbar />
               <Typography
@@ -74,7 +102,7 @@ const workspaces = () => {
                 variant="h5"
                 className={classes.title}
               >
-                Membro em
+                {allWorkspaces.length ? 'Membro em' : 'Você ainda não é membro em nenhum workspace'}
               </Typography>
               <Toolbar />
               <GridComponent>
