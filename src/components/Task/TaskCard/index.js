@@ -7,7 +7,7 @@ import {
   Button,
 } from '@material-ui/core';
 import React from 'react';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import moment from 'moment';
 import LinkIcon from '@material-ui/icons/Link';
 import EditIcon from '@material-ui/icons/Edit';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
@@ -16,7 +16,7 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import useStyles from './styles';
 
-export const TaskCard = () => {
+export const TaskCard = ({ taskDetail }) => {
   const classes = useStyles();
   return (
     <Card className={classes.card} variant="outlined">
@@ -32,12 +32,12 @@ export const TaskCard = () => {
               <Icon className={classes.icon}>
                 <EditIcon />
               </Icon>
-              20 min
+              {moment.unix(taskDetail.createdAt / 1000).format('DD/MM/YYYY')}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={3} md={3} lg={4} xl={4}>
             <Typography variant="h5" className={classes.headerTitle}>
-              Task Title
+              {taskDetail.title}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={3} md={3} lg={4} xl={4}>
@@ -45,22 +45,22 @@ export const TaskCard = () => {
               <Icon className={classes.icon}>
                 <TrendingUpIcon />
               </Icon>
-              Alta
+              {(() => {
+                if (taskDetail.priority === 'Low') {
+                  return 'Baixa';
+                }
+                if (taskDetail.priority === 'Medium') {
+                  return 'Média';
+                }
+                return 'Alta';
+              })()}
             </Typography>
           </Grid>
         </Grid>
         <Divider />
-        <Box pt={2} pb={3}>
-          <Typography variant="h6" align="left" className={classes.description}>
-            Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit.
-            Commodi temporibus quaerat iusto
-            alias incidunt sed! Similique non,
-            ipsa ab ducimus hic fugiat velit esse,
-            voluptatibus labore, architecto distinctio a
-            numquam. Fugiat nesciunt dolorem, ad commodi
-            laudantium facilis eos voluptate harum animi
-            voluptatem numquam quia similique nam doloribus neque? Commodi, possimus!
+        <Box pt={2} pb={3} pr={3}>
+          <Typography variant="h6" className={classes.description}>
+            {taskDetail.description}
           </Typography>
         </Box>
         <Grid
@@ -69,30 +69,41 @@ export const TaskCard = () => {
           justify="center"
           spacing={2}
         >
-          <Grid item xs={6} sm={3} md={3} lg={3} xl={3}>
-            <Button
-              startIcon={<LinkIcon />}
-              className={classes.button}
-              variant="outlined"
-            >
-              Link
-            </Button>
-          </Grid>
-          <Grid item xs={6} sm={3} md={3} lg={3} xl={3}>
-            <Button
-              startIcon={<InsertDriveFileIcon />}
-              className={classes.button}
-              variant="outlined"
-            >
-              Arquivo
-            </Button>
-          </Grid>
+          {!taskDetail.link ? (
+            <></>
+          ) : (
+            <Grid item xs={6} sm={3} md={3} lg={3} xl={3}>
+              <Button
+                startIcon={<LinkIcon />}
+                className={classes.button}
+                variant="outlined"
+                href={taskDetail.link}
+              >
+                Link
+              </Button>
+            </Grid>
+          )}
+          {!taskDetail.file ? (
+            <></>
+          ) : (
+
+            <Grid item xs={6} sm={3} md={3} lg={3} xl={3}>
+              <Button
+                startIcon={<InsertDriveFileIcon />}
+                className={classes.button}
+                variant="outlined"
+                href={taskDetail.file}
+              >
+                Arquivo
+              </Button>
+            </Grid>
+          )}
           <Grid item xs={6} sm={3} md={3} lg={3} xl={3}>
             <Icon className={classes.icon}>
               <AccessTimeIcon />
             </Icon>
             <Typography variant="h6" className={classes.priority}>
-              20/07/2020
+              {taskDetail.maxDate ? moment.unix(taskDetail.maxDate / 1000).format('DD/MM/YYYY') : ('Sem Prazo')}
             </Typography>
           </Grid>
           <Grid item xs={6} sm={3} md={3} lg={3} xl={3}>
@@ -100,7 +111,15 @@ export const TaskCard = () => {
               <MoreHorizIcon />
             </Icon>
             <Typography variant="h6" className={classes.priority}>
-              Em Progresso
+              {(() => {
+                if (taskDetail.progress === 'Not started') {
+                  return 'Não Iniciada';
+                }
+                if (taskDetail.progress === 'In progress') {
+                  return 'Em progresso';
+                }
+                return 'Finalizada';
+              })()}
             </Typography>
           </Grid>
         </Grid>

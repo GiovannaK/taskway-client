@@ -12,6 +12,13 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'uppercase',
     fontWeight: 'bold',
   },
+  svg: {
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
+  svgGrid: {
+    marginTop: '10vh',
+  },
 }));
 
 export default useStyles;

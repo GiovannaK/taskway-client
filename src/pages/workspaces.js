@@ -49,8 +49,6 @@ const workspaces = () => {
     toast.error('Não foi possível mostrar seus workspaces');
   }
 
-  console.log(allWorkspaces);
-
   return (
     <>
       <PaperComponent>

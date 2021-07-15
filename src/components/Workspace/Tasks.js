@@ -12,39 +12,51 @@ import {
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import moment from 'moment';
+import Link from 'next/link';
 import useStyles from './styles';
 
-export const Tasks = () => {
+export const Tasks = ({ task }) => {
   const classes = useStyles();
   return (
     <Card className={classes.card}>
       <CardHeader
         action={(
-          <IconButton
-            aria-label="settings"
-            className={classes.typography}
-          >
-            <ChevronRightIcon
-              fontSize="large"
-              className={classes.icon}
-            />
-          </IconButton>
+          <Link href={`${task.workspaceId}/${task.id}`}>
+            <IconButton
+              aria-label="settings"
+              className={classes.typography}
+            >
+              <ChevronRightIcon
+                fontSize="large"
+                className={classes.icon}
+              />
+            </IconButton>
+          </Link>
       )}
         classes={{ title: classes.headerTitle }}
         titleTypographyProps={{ variant: 'h5' }}
-        title="Task Title"
+        title={task.title}
       />
       <Divider />
       <CardContent>
         <Box display="flex" justifyContent="space-between">
           <Chip
-            avatar={<Avatar>A</Avatar>}
-            label="Allan A"
+            avatar={<Avatar src={task.tasksUsers.profile.imageUrl} />}
+            label={`${task.tasksUsers.firstName} ${task.tasksUsers.lastName}`}
             variant="outlined"
             className={classes.labelChip}
           />
           <Typography variant="h6" className={classes.typography}>
-            Em Progresso
+            {(() => {
+              if (task.progress === 'Not started') {
+                return 'Não Iniciada';
+              }
+              if (task.progress === 'In progress') {
+                return 'Em progresso';
+              }
+              return 'Finalizada';
+            })()}
           </Typography>
         </Box>
       </CardContent>
@@ -53,13 +65,21 @@ export const Tasks = () => {
           <AccessTimeIcon className={classes.icon} />
         </Icon>
         <Typography variant="h6" className={classes.typography}>
-          30/07/2020
+          {task.maxDate ? moment.unix(task.maxDate / 1000).format('DD/MM/YYYY') : ('Sem Prazo')}
         </Typography>
         <Icon>
           <TrendingUpIcon className={classes.icon} />
         </Icon>
         <Typography variant="h6" className={classes.typography}>
-          Alta
+          {(() => {
+            if (task.priority === 'Low') {
+              return 'Baixa';
+            }
+            if (task.priority === 'Medium') {
+              return 'Média';
+            }
+            return 'Alta';
+          })()}
         </Typography>
       </CardActions>
     </Card>

@@ -13,6 +13,7 @@ import { AvatarGroup } from '@material-ui/lab';
 import React from 'react';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import moment from 'moment';
+import Link from 'next/link';
 import useStyles from './styles';
 
 export const WorkspaceCard = ({ workspace }) => {
@@ -28,12 +29,14 @@ export const WorkspaceCard = ({ workspace }) => {
           />
         )}
         action={(
-          <IconButton
-            aria-label="settings"
-            className={classes.typography}
-          >
-            <ChevronRightIcon fontSize="large" />
-          </IconButton>
+          <Link href={`/workspace/${workspace.id}`}>
+            <IconButton
+              aria-label="settings"
+              className={classes.typography}
+            >
+              <ChevronRightIcon fontSize="large" />
+            </IconButton>
+          </Link>
                   )}
         classes={{ title: classes.headerTitle }}
         titleTypographyProps={{ variant: 'h6' }}
@@ -49,8 +52,10 @@ export const WorkspaceCard = ({ workspace }) => {
 
             <AvatarGroup max={5}>
               {workspace.users.map((user) => (
-                <Avatar src={user.profile.imageUrl ? user.profile.imageUrl
-                  : ''}
+                <Avatar
+                  key={user.id}
+                  src={user.profile.imageUrl ? user.profile.imageUrl
+                    : ''}
                 />
               ))}
             </AvatarGroup>
