@@ -37,7 +37,6 @@ const login = () => {
     },
     onError(err) {
       toast.error('Não foi possível fazer o login do usuário');
-      console.log(err);
     },
   });
 

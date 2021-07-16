@@ -23,7 +23,7 @@ export const WorkspaceCard = ({ workspace }) => {
       <CardHeader
         avatar={(
           <Avatar
-            aria-label="recipe"
+            aria-label="one"
             className={classes.avatar}
             src={workspace.owner.profile.imageUrl ? workspace.owner.profile.imageUrl : ''}
           />
@@ -44,7 +44,7 @@ export const WorkspaceCard = ({ workspace }) => {
       />
       <CardContent>
         <Box display="flex" justifyContent="center">
-          {!workspace.users.length ? (
+          {!workspace.users.length && !workspace.users ? (
             <Typography variant="h6" className={classes.member}>
               Nenhum membro
             </Typography>

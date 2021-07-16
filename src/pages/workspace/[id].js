@@ -10,6 +10,7 @@ import { TopBar } from '../../components/TopBar';
 import Layout from '../../components/Layout';
 import { Tasks } from '../../components/Workspace/Tasks';
 import { Loading } from '../../components/Loading';
+import withAuth from '../../utils/withAuth';
 
 const QUERY_TASKS = gql`
   query tasks($workspaceId: ID!){
@@ -91,4 +92,4 @@ const workspace = () => {
   );
 };
 
-export default workspace;
+export default withAuth(workspace);

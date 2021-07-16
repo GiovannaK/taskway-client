@@ -14,12 +14,41 @@ import React, { useState } from 'react';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { gql, useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
 import useStyles from './styles';
 import { Navbar } from '../Navbar';
+import { Loading } from '../Loading';
+
+const LOGOUT = gql`
+  mutation userLogout{
+    userLogout
+  }
+`;
 
 export const TopBar = () => {
+  const router = useRouter();
   const classes = useStyles();
   const [openDrawer, setOpenDrawer] = useState(false);
+
+  const [logoutUser, { loading }] = useMutation(LOGOUT, {
+    onError(err) {
+      <Loading />;
+    },
+    onCompleted(data) {
+      /* router.push('/login'); */
+      window.location.href = '/login';
+    },
+  });
+
+  if (loading) {
+    <Loading />;
+  }
+
+  const handleLogout = () => {
+    logoutUser();
+  };
+
   return (
     <>
       <AppBar
@@ -49,7 +78,7 @@ export const TopBar = () => {
           <Hidden mdDown>
             <Toolbar>
               <Tooltip title="Sair">
-                <IconButton className={classes.Icons}>
+                <IconButton className={classes.Icons} onClick={handleLogout}>
                   <ExitToAppIcon fontSize="large" />
                 </IconButton>
               </Tooltip>
@@ -57,7 +86,7 @@ export const TopBar = () => {
           </Hidden>
         </Box>
       </AppBar>
-      <Navbar openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
+      <Navbar openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} logoutUser={logoutUser} />
     </>
   );
 };

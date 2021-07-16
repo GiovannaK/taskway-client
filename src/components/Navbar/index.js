@@ -17,7 +17,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import useStyles from './styles';
 
-export const Navbar = ({ openDrawer, setOpenDrawer }) => {
+export const Navbar = ({ openDrawer, setOpenDrawer, logoutUser }) => {
   const classes = useStyles();
   return (
     <Drawer
@@ -76,7 +76,7 @@ export const Navbar = ({ openDrawer, setOpenDrawer }) => {
           <ListItemIcon>
             <ExitToAppIcon className={classes.listIcons} />
           </ListItemIcon>
-          <ListItemText>
+          <ListItemText onClick={logoutUser}>
             <Typography
               variant="h6"
               color="primary"
