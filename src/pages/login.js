@@ -33,7 +33,8 @@ const login = () => {
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(_, __) {
-      router.push('/workspaces');
+      /* router.push('/workspaces'); */
+      window.location.href = '/workspaces';
     },
     onError(err) {
       toast.error('Não foi possível fazer o login do usuário');

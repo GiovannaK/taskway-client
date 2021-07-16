@@ -41,9 +41,7 @@ export const ProfileProvider = ({ children }) => {
     if (profile) {
       setUserProfile(profile);
     }
-  }, []);
-
-  console.log(profile);
+  }, [profile]);
 
   return (
     <ProfileContext.Provider value={{ userProfile }}>

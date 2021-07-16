@@ -6,7 +6,7 @@ import {
 import useStyles from './styles';
 import { GridComponent } from '../../GridComponent';
 
-export const ProfileInfoCard = () => {
+export const ProfileInfoCard = ({ userProfile }) => {
   const classes = useStyles();
   return (
     <GridComponent>
@@ -23,31 +23,33 @@ export const ProfileInfoCard = () => {
             <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
               <Card elevation={0}>
                 <CardContent>
-                  <Avatar className={classes.avatar}>
-                    A
-                  </Avatar>
+                  <Avatar
+                    className={classes.avatar}
+                    src={!userProfile.imageUrl ? '' : userProfile.imageUrl}
+                  />
                 </CardContent>
               </Card>
             </Grid>
             <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
               <Card elevation={0}>
                 <CardContent>
-                  <Typography
-                    variant="h5"
-                    className={classes.title}
-                  >
-                    User Username
-                  </Typography>
+                  {!userProfile.user ? (
+                    <></>
+                  ) : (
+
+                    <Typography
+                      variant="h5"
+                      className={classes.title}
+                    >
+                      {`${!userProfile.user.firstName ? '' : userProfile.user.firstName} ${!userProfile.user.lastName ? '' : userProfile.user.lastName}`}
+                    </Typography>
+                  )}
                   <Toolbar />
                   <Typography
                     variant="h6"
                     className={classes.bio}
-                    align="left"
                   >
-                    Lorem ipsum dolor sit
-                    amet consectetur adipisicing elit. Qui, vel!
-                    amet consectetur adipisicing elit. Qui, vel!
-                    amet consectetur adipisicing elit. Qui, vel!
+                    {!userProfile.bio ? 'Escreva sobre você' : userProfile.bio}
                   </Typography>
                 </CardContent>
               </Card>
