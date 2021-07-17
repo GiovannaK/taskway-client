@@ -8,6 +8,11 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     width: theme.spacing(15),
     height: theme.spacing(15),
+    transition: '0.5s ease-in-out',
+    '&:hover': {
+      filter: 'brightness(50%)',
+      cursor: 'pointer',
+    },
   },
   title: {
     textTransform: 'uppercase',
@@ -16,6 +21,12 @@ const useStyles = makeStyles((theme) => ({
   },
   bio: {
     color: theme.palette.primary.dark,
+  },
+  inputFile: {
+    display: 'none',
+  },
+  file: {
+    marginTop: theme.spacing(2),
   },
 }));
 
