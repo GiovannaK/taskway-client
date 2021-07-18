@@ -4,6 +4,7 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
+import Link from 'next/link';
 import useStyles from '../../styles/workspaceDetail';
 import { PaperComponent } from '../../components/PaperComponent';
 import { TopBar } from '../../components/TopBar';
@@ -82,9 +83,11 @@ const workspace = () => {
                 ))
               )}
             </Grid>
-            <Fab className={classes.fab}>
-              <AddIcon />
-            </Fab>
+            <Link href={`${id}/createTask`}>
+              <Fab className={classes.fab}>
+                <AddIcon />
+              </Fab>
+            </Link>
           </Box>
         )}
       </Layout>
