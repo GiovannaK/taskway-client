@@ -12,30 +12,7 @@ import Layout from '../../components/Layout';
 import { Tasks } from '../../components/Workspace/Tasks';
 import { Loading } from '../../components/Loading';
 import withAuth from '../../utils/withAuth';
-
-const QUERY_TASKS = gql`
-  query tasks($workspaceId: ID!){
-    tasks(workspaceId: $workspaceId){
-      title
-      workspaceId
-      id
-      link
-      file
-      description
-      maxDate
-      progress
-      priority
-      assignTo
-      tasksUsers{
-        firstName
-        lastName
-        profile {
-          imageUrl
-        }
-      }
-    }
-  }
-`;
+import { QUERY_TASKS } from '../../utils/queries/queryTasks';
 
 const workspace = () => {
   const classes = useStyles();

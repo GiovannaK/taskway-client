@@ -22,6 +22,7 @@ import { useRouter } from 'next/router';
 import useStyles from './styles';
 import { Loading } from '../../Loading';
 import { updateTaskValidation } from '../../../utils/updateTaskValidation';
+import { DeleteDialog } from '../DeleteDialog';
 
 const USERS_WORKSPACE = gql`
   query usersWorkspace($id: ID!) {
@@ -62,6 +63,7 @@ export const SpeedComponent = ({
   const router = useRouter();
   const { id, taskId } = router.query;
   const [openDialog, setOpenDialog] = React.useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
   const [variables, setVariables] = React.useState({
     title: '',
     description: '',
@@ -87,7 +89,6 @@ export const SpeedComponent = ({
     },
     onError(err) {
       toast.error('Não foi possível criar tarefa');
-      console.log(err);
     },
     refetchQueries: [
       {
@@ -143,6 +144,14 @@ export const SpeedComponent = ({
     setOpen(true);
   };
 
+  const handleOpenDeleteDialog = () => {
+    setOpenDeleteDialog(true);
+  };
+
+  const handleCloseDeleteDialog = () => {
+    setOpenDeleteDialog(false);
+  };
+
   const handleOpenDialog = () => {
     setOpenDialog(true);
   };
@@ -153,7 +162,7 @@ export const SpeedComponent = ({
 
   const actions = [
     { icon: <EditIcon className={classes.icon} onClick={handleOpenDialog} />, name: 'Editar' },
-    { icon: <DeleteIcon className={classes.icon} />, name: 'Apagar' },
+    { icon: <DeleteIcon className={classes.icon} onClick={handleOpenDeleteDialog} />, name: 'Apagar' },
   ];
 
   const handleSubmit = (e) => {
@@ -397,6 +406,10 @@ export const SpeedComponent = ({
           </Button>
         </DialogActions>
       </Dialog>
+      <DeleteDialog
+        openDeleteDialog={openDeleteDialog}
+        handleCloseDeleteDialog={handleCloseDeleteDialog}
+      />
     </>
   );
 };
