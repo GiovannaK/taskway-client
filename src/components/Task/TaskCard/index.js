@@ -77,6 +77,7 @@ export const TaskCard = ({ taskDetail }) => {
                 startIcon={<LinkIcon />}
                 className={classes.button}
                 variant="outlined"
+                target="_blank"
                 href={taskDetail.link}
               >
                 Link
@@ -92,6 +93,7 @@ export const TaskCard = ({ taskDetail }) => {
                 startIcon={<InsertDriveFileIcon />}
                 className={classes.button}
                 variant="outlined"
+                target="_blank"
                 href={taskDetail.file}
               >
                 Arquivo

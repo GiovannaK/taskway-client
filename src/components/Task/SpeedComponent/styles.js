@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     color: theme.palette.primary.main,
   },
+  uploadButton: {
+    color: theme.palette.secondary.dark,
+  },
 }));
 
 export default useStyles;

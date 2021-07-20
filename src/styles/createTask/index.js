@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     backgroundColor: theme.palette.secondary.main,
+    minHeight: '100%',
   },
   label: {
     color: theme.palette.secondary.dark,
@@ -20,7 +21,13 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     width: '100%',
-    color: theme.palette.primary.dark,
+    color: theme.palette.secondary.light,
+    background: theme.palette.secondary.dark,
+    padding: theme.spacing(1),
+  },
+  svg: {
+    width: '100%',
+    height: '100%',
   },
 }));
 

@@ -9,6 +9,7 @@ import {
   Avatar,
   Input,
   Typography,
+  Hidden,
 } from '@material-ui/core';
 import MomentUtils from '@date-io/moment';
 import {
@@ -20,12 +21,14 @@ import moment from 'moment';
 import { useRouter } from 'next/router';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
+import PublishIcon from '@material-ui/icons/Publish';
 import { PaperComponent } from '../../../components/PaperComponent';
 import { TopBar } from '../../../components/TopBar';
 import useStyles from '../../../styles/createTask';
 import Layout from '../../../components/Layout';
 import { Loading } from '../../../components/Loading';
 import { createTaskValidation } from '../../../utils/createTaskValidation';
+import { TaskCard } from '../../../components/Task/TaskCard';
 
 const USERS_WORKSPACE = gql`
   query usersWorkspace($id: ID!) {
@@ -137,7 +140,7 @@ const createTask = () => {
       <Layout title="Taskway | Criar Tarefa">
         <Box pt={8}>
           <Grid container align="center" justify="center">
-            <Grid item xs={12} sm={12} md={12} lg={8} xl={8}>
+            <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
               <Card className={classes.card} variant="outlined">
                 <CardContent>
                   <Toolbar />
@@ -281,7 +284,7 @@ const createTask = () => {
                         <Button
                           type="submit"
                           className={classes.button}
-                          variant="outlined"
+                          variant="contained"
                           disabled={loading}
                         >
                           {loading ? 'Criando...' : 'Criar Tarefa'}
@@ -290,13 +293,19 @@ const createTask = () => {
                       </Grid>
                     </Grid>
                   </form>
-                  <Button variant="outlined">
-                    Adicionar arquivo
-                  </Button>
                 </CardContent>
               </Card>
             </Grid>
-            <Toolbar />
+            <Hidden mdDown>
+              <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+                <Card className={classes.card} elevation={0}>
+                  <CardContent>
+                    <Toolbar />
+                    <img src="../../complete_task.svg" alt="svg de tarefa" className={classes.svg} />
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Hidden>
           </Grid>
         </Box>
       </Layout>

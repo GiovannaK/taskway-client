@@ -19,6 +19,7 @@ import moment from 'moment';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import { DropzoneDialog } from 'material-ui-dropzone';
 import useStyles from './styles';
 import { Loading } from '../../Loading';
 import { updateTaskValidation } from '../../../utils/updateTaskValidation';
@@ -36,6 +37,17 @@ const USERS_WORKSPACE = gql`
       }
     }
   }
+`;
+
+const UPLOAD_FILE = gql`
+  mutation taskSingleUpload($id: ID!, $file: Upload!, $workspaceId: ID!) {
+  taskSingleUpload(id: $id, file: $file, workspaceId: $workspaceId){
+    filename
+    encoding
+    mimetype
+    file
+  }
+}
 `;
 
 const UPDATE_TASK = gql`
@@ -64,6 +76,7 @@ export const SpeedComponent = ({
   const { id, taskId } = router.query;
   const [openDialog, setOpenDialog] = React.useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
+  const [openUpload, setOpenUpload] = React.useState(false);
   const [variables, setVariables] = React.useState({
     title: '',
     description: '',
@@ -104,6 +117,24 @@ export const SpeedComponent = ({
   if (errorUserWorkspaces) {
     <Loading />;
   }
+
+  const [uploadFile, { loading: loadingUpload }] = useMutation(UPLOAD_FILE, {
+    update(_, __) {
+      toast.info('Arquivo adicionado com sucesso');
+    },
+    onError(err) {
+      toast.error('Não foi possível adicionar arquivo');
+    },
+    refetchQueries: [
+      {
+        query: QUERY_TASKS_BY_ID,
+        variables: {
+          workspaceId: id,
+          id: taskId,
+        },
+      },
+    ],
+  });
 
   React.useEffect(() => {
     if (taskDetail && taskDetail.tasksUsers) {
@@ -396,6 +427,14 @@ export const SpeedComponent = ({
                   </Button>
                 </Grid>
               </Grid>
+              <Toolbar />
+              <Button
+                className={classes.uploadButton}
+                variant="outlined"
+                onClick={() => setOpenUpload(true)}
+              >
+                Adicionar arquivo
+              </Button>
             </form>
           </CardContent>
           {/* </Card> */}
@@ -409,6 +448,23 @@ export const SpeedComponent = ({
       <DeleteDialog
         openDeleteDialog={openDeleteDialog}
         handleCloseDeleteDialog={handleCloseDeleteDialog}
+      />
+      <DropzoneDialog
+        /* acceptedFiles={['.pdf', '.xls', '.doc', '.docx', '.csv']} */
+        cancelButtonText="cancelar"
+        submitButtonText="enviar"
+        maxFileSize={3145728}
+        open={openUpload}
+        filesLimit={1}
+        onClose={() => setOpenUpload(false)}
+        onSave={(files) => {
+          const file = files[0];
+          console.log(file);
+          uploadFile({ variables: { file, id: taskId, workspaceId: id } });
+          setOpenUpload(false);
+        }}
+        showPreviews
+        showFileNamesInPreview
       />
     </>
   );
