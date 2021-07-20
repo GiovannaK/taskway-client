@@ -13,8 +13,9 @@ import { TaskCard } from '../../../components/Task/TaskCard';
 import { CommentsCard } from '../../../components/Task/CommentsCard';
 import { SpeedComponent } from '../../../components/Task/SpeedComponent';
 import { Loading } from '../../../components/Loading';
+/* import { QUERY_TASKS_BY_ID } from '../../../utils/queries/queryTasksById'; */
 
-const QUERY_TASKS_BY_ID = gql`
+export const QUERY_TASKS_BY_ID = gql`
   query taskById($workspaceId: ID!, $id: ID!){
     taskById(workspaceId: $workspaceId, id: $id){
       title
@@ -65,21 +66,27 @@ const task = () => {
             <Loading />
           ) : (
             taskDetail ? (
-              <Grid container align="center" justify="center">
-                <Grid item xs={12} sm={12} md={12} lg={10} xl={8}>
-                  <TaskCard taskDetail={taskDetail} />
-                  <Toolbar />
-                  <CommentsCard />
-                  <Toolbar />
+              <>
+                <Grid container align="center" justify="center">
+                  <Grid item xs={12} sm={12} md={12} lg={10} xl={8}>
+                    <TaskCard taskDetail={taskDetail} />
+                    <Toolbar />
+                    <CommentsCard />
+                    <Toolbar />
+                  </Grid>
                 </Grid>
-              </Grid>
-
+                <SpeedComponent
+                  id={id}
+                  taskId={taskId}
+                  taskDetail={taskDetail}
+                  QUERY_TASKS_BY_ID={QUERY_TASKS_BY_ID}
+                />
+              </>
             )
               : (<Loading />)
 
           )}
         </Box>
-        <SpeedComponent />
       </Layout>
     </PaperComponent>
   );
