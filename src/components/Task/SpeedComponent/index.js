@@ -4,7 +4,6 @@ import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import MomentUtils from '@date-io/moment';
 import {
   DialogContentText,
   Dialog, DialogActions,
@@ -14,8 +13,9 @@ import {
   Avatar,
   InputLabel, MenuItem, Select, CardContent, Card, Typography, Toolbar,
 } from '@material-ui/core';
+import MomentUtils from '@date-io/moment';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
@@ -24,6 +24,7 @@ import useStyles from './styles';
 import { Loading } from '../../Loading';
 import { updateTaskValidation } from '../../../utils/updateTaskValidation';
 import { DeleteDialog } from '../DeleteDialog';
+import 'moment/locale/pt-br';
 
 const USERS_WORKSPACE = gql`
   query usersWorkspace($id: ID!) {
@@ -145,7 +146,7 @@ export const SpeedComponent = ({
         link: taskDetail.link,
         progress: taskDetail.progress,
         priority: taskDetail.priority,
-        maxDate: moment.unix(taskDetail.maxDate / 1000),
+        maxDate: moment.utc(taskDetail.maxDate).tz('America/Sao_Paulo'),
         assignTo: taskDetail.assignTo,
       });
     }

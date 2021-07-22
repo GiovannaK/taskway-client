@@ -34,6 +34,10 @@ export const DeleteDialog = ({ openDeleteDialog, handleCloseDeleteDialog }) => {
         query: QUERY_TASKS,
         variables: {
           workspaceId: id,
+          progress: '',
+          priority: '',
+          assignTo: '',
+          maxDate: '',
         },
       },
     ],

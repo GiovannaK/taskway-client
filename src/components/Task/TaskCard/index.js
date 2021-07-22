@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import moment from 'moment';
+import momentTz from 'moment-timezone';
 import LinkIcon from '@material-ui/icons/Link';
 import EditIcon from '@material-ui/icons/Edit';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
@@ -105,7 +106,7 @@ export const TaskCard = ({ taskDetail }) => {
               <AccessTimeIcon />
             </Icon>
             <Typography variant="h6" className={classes.priority}>
-              {taskDetail.maxDate ? moment.unix(taskDetail.maxDate / 1000).format('DD/MM/YYYY') : ('Sem Prazo')}
+              {taskDetail.maxDate ? momentTz.utc(taskDetail.maxDate).tz('America/Sao_Paulo').format('DD/MM/YYYY') : ('Sem Prazo')}
             </Typography>
           </Grid>
           <Grid item xs={6} sm={3} md={3} lg={3} xl={3}>

@@ -1,10 +1,15 @@
 import {
-  Box, Grid, Typography, Toolbar, Fab,
+  Box, Grid, Typography,
+  Toolbar, Fab, CardContent, Card, InputLabel, Select, MenuItem, Chip, Avatar, Button,
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
 import Link from 'next/link';
+import MomentUtils from '@date-io/moment';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import moment from 'moment';
+import { useState } from 'react';
 import useStyles from '../../styles/workspaceDetail';
 import { PaperComponent } from '../../components/PaperComponent';
 import { TopBar } from '../../components/TopBar';
@@ -13,11 +18,67 @@ import { Tasks } from '../../components/Workspace/Tasks';
 import { Loading } from '../../components/Loading';
 import withAuth from '../../utils/withAuth';
 import { QUERY_TASKS } from '../../utils/queries/queryTasks';
+import 'moment/locale/pt-br';
+
+const USERS_WORKSPACE = gql`
+  query usersWorkspace($id: ID!) {
+    usersWorkspace(id: $id){
+      firstName
+      lastName
+      email
+      id
+      profile {
+        imageUrl
+      }
+    }
+  }
+`;
 
 const workspace = () => {
   const classes = useStyles();
   const router = useRouter();
   const { id } = router.query;
+  const [variables, setVariables] = useState({
+    priority: '',
+    assignTo: '',
+    maxDate: '',
+    progress: '',
+  });
+
+  const handleDateChange = (date) => {
+    setVariables({ ...variables, maxDate: date });
+  };
+
+  const handlePriority = (e) => {
+    setVariables({ ...variables, priority: e.target.value });
+  };
+
+  const handleAssignTo = (e) => {
+    setVariables({ ...variables, assignTo: e.target.value });
+  };
+
+  const handleProgress = (e) => {
+    setVariables({ ...variables, progress: e.target.value });
+  };
+
+  const cleanFilter = () => {
+    setVariables({
+      ...variables, maxDate: '', priority: '', progress: '', assignTo: '',
+    });
+  };
+
+  const {
+    error: errorUserWorkspaces, loading: loadingUserWorkspaces,
+    data: { usersWorkspace } = {},
+  } = useQuery(USERS_WORKSPACE, {
+    variables: {
+      id,
+    },
+  });
+
+  if (errorUserWorkspaces) {
+    <Loading />;
+  }
 
   const {
     data: { tasks } = {},
@@ -25,6 +86,10 @@ const workspace = () => {
   } = useQuery(QUERY_TASKS, {
     variables: {
       workspaceId: id,
+      progress: variables.progress,
+      assignTo: variables.assignTo,
+      priority: variables.priority,
+      maxDate: variables.maxDate,
     },
   });
 
@@ -38,6 +103,131 @@ const workspace = () => {
       <Layout title="Taskway | Workspace">
         {loading ? (<Loading />) : (
           <Box pt={10}>
+            <Grid container spacing={2} align="center" justify="center">
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <Card className={classes.card} variant="outlined">
+                  <CardContent>
+                    <Grid container spacing={1}>
+                      <Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
+                        <InputLabel
+                          id="progress"
+                          className={classes.label}
+                        >
+                          Progresso
+                        </InputLabel>
+                        <Select
+                          id="progress"
+                          defaultValue="Default Value"
+                          multiline
+                          variant="outlined"
+                          className={classes.input}
+                          value={variables.progress}
+                          onChange={handleProgress}
+                        >
+                          <MenuItem value="Not started">
+                            Não Iniciada
+                          </MenuItem>
+                          <MenuItem value="In progress">
+                            Em Progresso
+                          </MenuItem>
+                          <MenuItem value="finished">
+                            Finalizada
+                          </MenuItem>
+                        </Select>
+                      </Grid>
+                      <Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
+                        <InputLabel className={classes.label} id="priority">
+                          Prioridade
+                        </InputLabel>
+                        <Select
+                          id="priority"
+                          defaultValue="Default Value"
+                          multiline
+                          variant="outlined"
+                          className={classes.input}
+                          value={variables.priority}
+                          onChange={handlePriority}
+                        >
+                          <MenuItem value="Low">
+                            Baixa
+                          </MenuItem>
+                          <MenuItem value="Medium">
+                            Média
+                          </MenuItem>
+                          <MenuItem value="High">
+                            Alta
+                          </MenuItem>
+                        </Select>
+                      </Grid>
+                      <Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
+                        <InputLabel className={classes.label} id="maxDate">
+                          Prazo
+                        </InputLabel>
+                        <MuiPickersUtilsProvider locale={moment.locale('pt-br')} utils={MomentUtils}>
+                          <KeyboardDatePicker
+                            disableToolbar
+                            variant="outlined"
+                            format="DD/MM/YYYY"
+                            inputVariant="outlined"
+                            id="maxDate"
+                            value={variables.maxDate}
+                            onChange={handleDateChange}
+                            error={false}
+                            style={{ width: '100%' }}
+                            InputLabelProps={{
+                              className: classes.label,
+                            }}
+                            KeyboardButtonProps={{
+                              'aria-label': 'change date',
+                            }}
+                          />
+                        </MuiPickersUtilsProvider>
+                      </Grid>
+                      <Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
+                        <InputLabel className={classes.label} id="assignedTo">
+                          Atribuir
+                        </InputLabel>
+                        <Select
+                          id="assignedTo"
+                          defaultValue="Default Value"
+                          multiline
+                          variant="outlined"
+                          className={classes.input}
+                          value={variables.assignTo}
+                          onChange={handleAssignTo}
+                          disabled={loadingUserWorkspaces}
+                        >
+                          {!usersWorkspace ? (
+                            []
+                          ) : (
+                            usersWorkspace.map((user) => (
+
+                              <MenuItem value={user.id} key={user.id}>
+                                <Chip
+                                  avatar={(
+                                    <Avatar src={user.profile.imageUrl ? user.profile.imageUrl
+                                      : ''}
+                                    />
+                                  )}
+                                  label={`${user.firstName} ${user.lastName}`}
+                                  variant="outlined"
+                                />
+                              </MenuItem>
+                            ))
+                          )}
+                        </Select>
+                      </Grid>
+                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                        <Button className={classes.button} onClick={cleanFilter}>
+                          Limpar
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
+            <Toolbar />
             <Grid container spacing={3} align="center" justify="center">
               {tasks && !tasks.length ? (
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className={classes.svgGrid}>
@@ -47,7 +237,7 @@ const workspace = () => {
                     variant="h5"
                     className={classes.title}
                   >
-                    Você ainda não criou tarefas
+                    Nenhuma tarefa encontrada!
 
                   </Typography>
                 </Grid>

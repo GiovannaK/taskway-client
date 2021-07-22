@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_TASKS = gql`
-  query tasks($workspaceId: ID!){
-    tasks(workspaceId: $workspaceId){
+  query tasks($workspaceId: ID!, $progress: String, $priority: String, $maxDate: String, $assignTo: ID!){
+    tasks(workspaceId: $workspaceId, progress: $progress, priority: $priority, maxDate: $maxDate assignTo: $assignTo){
       title
       workspaceId
       id
@@ -14,6 +14,8 @@ export const QUERY_TASKS = gql`
       priority
       assignTo
       tasksUsers{
+        id
+        email
         firstName
         lastName
         profile {

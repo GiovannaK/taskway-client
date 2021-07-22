@@ -19,6 +19,17 @@ const useStyles = makeStyles((theme) => ({
   svgGrid: {
     marginTop: '10vh',
   },
+  label: {
+    color: theme.palette.secondary.dark,
+  },
+  input: {
+    width: '100%',
+  },
+  button: {
+    width: '100%',
+    color: theme.palette.primary.main,
+    marginTop: theme.spacing(2),
+  },
 }));
 
 export default useStyles;

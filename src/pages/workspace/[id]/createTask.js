@@ -29,6 +29,7 @@ import Layout from '../../../components/Layout';
 import { Loading } from '../../../components/Loading';
 import { createTaskValidation } from '../../../utils/createTaskValidation';
 import { TaskCard } from '../../../components/Task/TaskCard';
+import { QUERY_TASKS } from '../../../utils/queries/queryTasks';
 
 const USERS_WORKSPACE = gql`
   query usersWorkspace($id: ID!) {
@@ -106,6 +107,18 @@ const createTask = () => {
     onError(err) {
       toast.error('Não foi possível criar tarefa');
     },
+    refetchQueries: [
+      {
+        query: QUERY_TASKS,
+        variables: {
+          workspaceId: id,
+          progress: '',
+          priority: '',
+          assignTo: '',
+          maxDate: '',
+        },
+      },
+    ],
   });
 
   const handleSubmit = (e) => {

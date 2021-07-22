@@ -12,7 +12,7 @@ import {
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import Link from 'next/link';
 import useStyles from './styles';
 
@@ -65,7 +65,7 @@ export const Tasks = ({ task }) => {
           <AccessTimeIcon className={classes.icon} />
         </Icon>
         <Typography variant="h6" className={classes.typography}>
-          {task.maxDate ? moment.unix(task.maxDate / 1000).format('DD/MM/YYYY') : ('Sem Prazo')}
+          {task.maxDate ? moment.utc(task.maxDate).tz('America/Sao_Paulo').format('DD/MM/YYYY') : ('Sem Prazo')}
         </Typography>
         <Icon>
           <TrendingUpIcon className={classes.icon} />
