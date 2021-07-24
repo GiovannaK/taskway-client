@@ -8,35 +8,28 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.light,
   },
   title: {
-    color: theme.palette.secondary.light,
+    color: theme.palette.primary.main,
     textTransform: 'uppercase',
     fontWeight: 'bold',
-  },
-  svg: {
-    maxWidth: '100%',
-    maxHeight: '100%',
-  },
-  svgGrid: {
-    marginTop: '10vh',
-  },
-  label: {
-    color: theme.palette.secondary.dark,
+    paddingBottom: theme.spacing(1),
   },
   speedDial: {
     position: 'fixed',
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
-  icon: {
-    color: theme.palette.secondary.light,
+  card: {
+    backgroundColor: theme.palette.secondary.main,
+    minHeight: '100%',
   },
-  input: {
-    width: '100%',
+  avatar: {
+    marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
-  button: {
-    width: '100%',
-    color: theme.palette.primary.main,
-    marginTop: theme.spacing(2),
+  headerTitle: {
+    color: theme.palette.primary.dark,
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
   },
 }));
 

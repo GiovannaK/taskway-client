@@ -1,3 +1,5 @@
+import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
+import SpeedDial from '@material-ui/lab/SpeedDial';
 import {
   Box, Grid, Typography,
   Toolbar, Fab, CardContent, Card, InputLabel, Select, MenuItem, Chip, Avatar, Button,
@@ -10,6 +12,8 @@ import MomentUtils from '@date-io/moment';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import moment from 'moment';
 import { useState } from 'react';
+import EditIcon from '@material-ui/icons/Edit';
+import LockIcon from '@material-ui/icons/Lock';
 import useStyles from '../../styles/workspaceDetail';
 import { PaperComponent } from '../../components/PaperComponent';
 import { TopBar } from '../../components/TopBar';
@@ -38,6 +42,7 @@ const workspace = () => {
   const classes = useStyles();
   const router = useRouter();
   const { id } = router.query;
+  const [open, setOpen] = useState(false);
   const [variables, setVariables] = useState({
     priority: '',
     assignTo: '',
@@ -45,6 +50,19 @@ const workspace = () => {
     progress: '',
   });
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const cleanFilter = () => {
+    setVariables({
+      ...variables, priority: '', progress: '', assignTo: '', maxDate: '',
+    });
+  };
   const handleDateChange = (date) => {
     setVariables({ ...variables, maxDate: date });
   };
@@ -61,11 +79,10 @@ const workspace = () => {
     setVariables({ ...variables, progress: e.target.value });
   };
 
-  const cleanFilter = () => {
-    setVariables({
-      ...variables, maxDate: '', priority: '', progress: '', assignTo: '',
-    });
-  };
+  const actions = [
+    { icon: <Link href={`${id}/createTask`}><EditIcon className={classes.icon} /></Link>, name: 'Adicionar' },
+    { icon: <Link href={`${id}/permissions`}><LockIcon className={classes.icon} /></Link>, name: 'Permissões' },
+  ];
 
   const {
     error: errorUserWorkspaces, loading: loadingUserWorkspaces,
@@ -250,13 +267,26 @@ const workspace = () => {
                 ))
               )}
             </Grid>
-            <Link href={`${id}/createTask`}>
-              <Fab className={classes.fab}>
-                <AddIcon />
-              </Fab>
-            </Link>
           </Box>
         )}
+        <SpeedDial
+          ariaLabel="SpeedDial example"
+          className={classes.speedDial}
+          icon={<EditIcon className={classes.icon} />}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          open={open}
+          direction="up"
+        >
+          {actions.map((action) => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              onClick={handleClose}
+            />
+          ))}
+        </SpeedDial>
       </Layout>
     </PaperComponent>
   );
