@@ -19,7 +19,7 @@ export const createTaskValidation = (title, description, priority, assignTo) => 
     toast.error('Prioridade não pode ser nula');
   }
 
-  if (priority.length < 1) {
+  if (assignTo.length < 1) {
     formErrors = true;
     toast.error('Atribuir não pode ser nulo');
   }

@@ -19,7 +19,6 @@ export const DeleteDialog = ({ openDeleteDialog, handleCloseDeleteDialog }) => {
   const classes = useStyles();
   const router = useRouter();
   const { id, taskId } = router.query;
-  console.log(id, taskId);
 
   const [deleteTask, { loading }] = useMutation(DELETE_TASK, {
     update(_, __) {
