@@ -11,7 +11,8 @@ import Link from 'next/link';
 import MomentUtils from '@date-io/moment';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import moment from 'moment';
-import { useState } from 'react';
+import momentTz from 'moment-timezone';
+import { useState, useEffect } from 'react';
 import EditIcon from '@material-ui/icons/Edit';
 import LockIcon from '@material-ui/icons/Lock';
 import useStyles from '../../styles/workspaceDetail';
@@ -59,13 +60,8 @@ const workspace = () => {
     setOpen(true);
   };
 
-  const cleanFilter = () => {
-    setVariables({
-      ...variables, priority: '', progress: '', assignTo: '', maxDate: '',
-    });
-  };
   const handleDateChange = (date) => {
-    setVariables({ ...variables, maxDate: date });
+    setVariables({ ...variables, maxDate: momentTz.utc(date).add(1, 'days') });
   };
 
   const handlePriority = (e) => {
@@ -78,6 +74,12 @@ const workspace = () => {
 
   const handleProgress = (e) => {
     setVariables({ ...variables, progress: e.target.value });
+  };
+
+  const cleanFilter = () => {
+    setVariables({
+      ...variables, maxDate: '', priority: '', progress: '', assignTo: '',
+    });
   };
 
   const actions = [
@@ -135,7 +137,6 @@ const workspace = () => {
                         </InputLabel>
                         <Select
                           id="progress"
-                          defaultValue="Default Value"
                           multiline
                           variant="outlined"
                           className={classes.input}
@@ -159,7 +160,6 @@ const workspace = () => {
                         </InputLabel>
                         <Select
                           id="priority"
-                          defaultValue="Default Value"
                           multiline
                           variant="outlined"
                           className={classes.input}
@@ -207,7 +207,6 @@ const workspace = () => {
                         </InputLabel>
                         <Select
                           id="assignedTo"
-                          defaultValue="Default Value"
                           multiline
                           variant="outlined"
                           className={classes.input}
