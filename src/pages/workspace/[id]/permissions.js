@@ -48,10 +48,10 @@ const permissions = () => {
 
   const [deletePermission, { loading: loadingDelete }] = useMutation(DELETE_PERMISSIONS, {
     update(_, __) {
-      toast.info('Tarefa deletada com sucesso');
+      toast.info('Permissão excluída com sucesso.');
     },
     onError(err) {
-      toast.error('Não foi possível deletar tarefa');
+      toast.error('Não foi possível excluir permissão');
     },
     refetchQueries: [
       {
@@ -83,10 +83,15 @@ const permissions = () => {
     error, loading,
     data: { usersPermissionsByWorkspace: usersPermissions } = {},
   } = useQuery(QUERY_USERS_PERMISSIONS, {
+    fetchPolicy: 'cache-and-network',
     variables: {
       workspaceId: id,
     },
   });
+
+  if (loading) {
+    <Loading />;
+  }
 
   if (error) {
     <Loading />;

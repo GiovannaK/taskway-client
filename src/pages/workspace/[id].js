@@ -23,6 +23,7 @@ import { Loading } from '../../components/Loading';
 import withAuth from '../../utils/withAuth';
 import { QUERY_TASKS } from '../../utils/queries/queryTasks';
 import 'moment/locale/pt-br';
+import { usePermission } from '../../hooks/usePermission';
 
 const USERS_WORKSPACE = gql`
   query usersWorkspace($id: ID!) {

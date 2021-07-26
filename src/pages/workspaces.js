@@ -52,9 +52,6 @@ const workspaces = () => {
   return (
     <>
       <PaperComponent>
-        <Hidden mdDown>
-          <img src="waves.png" alt="wave" className={classes.image} />
-        </Hidden>
         <TopBar />
         <Layout title="Taskway | Workspaces">
           {loading ? (<Loading />) : (
