@@ -1,14 +1,15 @@
 /* eslint-disable no-nested-ternary */
-import { useQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import {
   Avatar,
-  Box, Card, CardContent, CircularProgress, Grid, TextField, Typography,
+  Box, Card, CardContent, CircularProgress, Divider, Grid, TextField, Typography,
 } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { toast } from 'react-toastify';
 import Layout from '../../../components/Layout';
 import { Loading } from '../../../components/Loading';
+import { AddMember } from '../../../components/PageWorkspaceMember/addMember';
 import { PaperComponent } from '../../../components/PaperComponent';
 import { TabComponent } from '../../../components/TabComponent';
 import { TopBar } from '../../../components/TopBar';
@@ -69,6 +70,7 @@ const workspaceMembers = () => {
                               display="flex"
                               alignItems="center"
                               pb={2}
+                              key={user.id}
                             >
                               <Avatar
                                 className={classes.avatar}
@@ -88,29 +90,7 @@ const workspaceMembers = () => {
                 </Card>
               </Grid>
               <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                <Card square className={classes.card}>
-                  <CardContent>
-                    <Typography
-                      variant="h5"
-                      className={classes.title}
-                      align="center"
-                    >
-                      Adicionar Membros
-                    </Typography>
-                    <Box pt={2}>
-                      <TextField
-                        id="search"
-                        label="Procurar usuários"
-                        variant="outlined"
-                        required
-                        className={classes.input}
-                        InputLabelProps={{
-                          className: classes.label,
-                        }}
-                      />
-                    </Box>
-                  </CardContent>
-                </Card>
+                <AddMember />
               </Grid>
             </Grid>
           </Box>
