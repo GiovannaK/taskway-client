@@ -1,0 +1,123 @@
+/* eslint-disable no-nested-ternary */
+import { useQuery } from '@apollo/client';
+import {
+  Avatar,
+  Box, Card, CardContent, CircularProgress, Grid, TextField, Typography,
+} from '@material-ui/core';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { toast } from 'react-toastify';
+import Layout from '../../../components/Layout';
+import { Loading } from '../../../components/Loading';
+import { PaperComponent } from '../../../components/PaperComponent';
+import { TabComponent } from '../../../components/TabComponent';
+import { TopBar } from '../../../components/TopBar';
+import useStyles from '../../../styles/workspaceMembers';
+import { USERS_WORKSPACE } from '../../../utils/queries/queryUsersWorkspaces';
+
+const workspaceMembers = () => {
+  const classes = useStyles();
+  const router = useRouter();
+  const { id } = router.query;
+  const {
+    error: errorUserWorkspaces, loading: loadingUserWorkspaces,
+    data: { usersWorkspace } = {},
+  } = useQuery(USERS_WORKSPACE, {
+    variables: {
+      id,
+    },
+  });
+
+  if (errorUserWorkspaces) {
+    <Loading />;
+  }
+
+  return (
+    <>
+      <PaperComponent>
+        <TopBar />
+        <Layout>
+          <TabComponent />
+          <Box pt={15}>
+            <Grid container spacing={1} align="center" justify="center">
+              <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                <Card className={classes.card} square>
+                  <CardContent>
+                    <Typography
+                      variant="h5"
+                      className={classes.title}
+                      align="center"
+                    >
+                      Membros
+                    </Typography>
+
+                    <Box
+                      pt={2}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="space-evenly"
+                      flexWrap="wrap"
+                    >
+                      {loadingUserWorkspaces ? (
+                        <CircularProgress />
+                      ) : (
+                        usersWorkspace && usersWorkspace.length ? (
+                          usersWorkspace.map((user) => (
+
+                            <Box
+                              flex="1 0 30%"
+                              display="flex"
+                              alignItems="center"
+                              pb={2}
+                            >
+                              <Avatar
+                                className={classes.avatar}
+                                src={user.profile.imageUrl ? user.profile.imageUrl
+                                  : ''}
+                              />
+                              <Typography variant="h6">{`${user.firstName} ${user.lastName}`}</Typography>
+                            </Box>
+                          ))
+                        ) : (
+                          <></>
+                        )
+
+                      )}
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                <Card square className={classes.card}>
+                  <CardContent>
+                    <Typography
+                      variant="h5"
+                      className={classes.title}
+                      align="center"
+                    >
+                      Adicionar Membros
+                    </Typography>
+                    <Box pt={2}>
+                      <TextField
+                        id="search"
+                        label="Procurar usuários"
+                        variant="outlined"
+                        required
+                        className={classes.input}
+                        InputLabelProps={{
+                          className: classes.label,
+                        }}
+                      />
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
+          </Box>
+        </Layout>
+      </PaperComponent>
+    </>
+  );
+};
+
+export default workspaceMembers;

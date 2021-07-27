@@ -25,20 +25,7 @@ import { Loading } from '../../Loading';
 import { updateTaskValidation } from '../../../utils/updateTaskValidation';
 import { DeleteDialog } from '../DeleteDialog';
 import 'moment/locale/pt-br';
-
-const USERS_WORKSPACE = gql`
-  query usersWorkspace($id: ID!) {
-    usersWorkspace(id: $id){
-      firstName
-      lastName
-      email
-      id
-      profile {
-        imageUrl
-      }
-    }
-  }
-`;
+import { USERS_WORKSPACE } from '../../../utils/queries/queryUsersWorkspaces';
 
 const UPLOAD_FILE = gql`
   mutation taskSingleUpload($id: ID!, $file: Upload!, $workspaceId: ID!) {

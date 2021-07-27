@@ -13,20 +13,7 @@ import useStyles from './styles';
 import { Loading } from '../Loading';
 import { QUERY_USERS_PERMISSIONS } from '../../utils/queries/queryUsersPermissions';
 import { addPermissionValidation } from '../../utils/addPermissionValidation';
-
-const USERS_WORKSPACE = gql`
-  query usersWorkspace($id: ID!) {
-    usersWorkspace(id: $id){
-      firstName
-      lastName
-      email
-      id
-      profile {
-        imageUrl
-      }
-    }
-  }
-`;
+import { USERS_WORKSPACE } from '../../utils/queries/queryUsersWorkspaces';
 
 const QUERY_PERMISSION = gql`
   query showPermissions{

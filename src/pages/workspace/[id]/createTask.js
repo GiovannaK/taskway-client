@@ -30,20 +30,7 @@ import { Loading } from '../../../components/Loading';
 import { createTaskValidation } from '../../../utils/createTaskValidation';
 import { TaskCard } from '../../../components/Task/TaskCard';
 import { QUERY_TASKS } from '../../../utils/queries/queryTasks';
-
-const USERS_WORKSPACE = gql`
-  query usersWorkspace($id: ID!) {
-    usersWorkspace(id: $id){
-      firstName
-      lastName
-      email
-      id
-      profile {
-        imageUrl
-      }
-    }
-  }
-`;
+import { USERS_WORKSPACE } from '../../../utils/queries/queryUsersWorkspaces';
 
 const CREATE_TASK = gql`
   mutation createTask($workspaceId: ID! $title: String! $link: String $description: String! $maxDate: String $priority: String $assignTo: ID!) {

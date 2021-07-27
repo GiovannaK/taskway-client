@@ -25,20 +25,8 @@ import withAuth from '../../utils/withAuth';
 import { QUERY_TASKS } from '../../utils/queries/queryTasks';
 import 'moment/locale/pt-br';
 import { usePermission } from '../../hooks/usePermission';
-
-const USERS_WORKSPACE = gql`
-  query usersWorkspace($id: ID!) {
-    usersWorkspace(id: $id){
-      firstName
-      lastName
-      email
-      id
-      profile {
-        imageUrl
-      }
-    }
-  }
-`;
+import { TabComponent } from '../../components/TabComponent';
+import { USERS_WORKSPACE } from '../../utils/queries/queryUsersWorkspaces';
 
 const workspace = () => {
   const classes = useStyles();
@@ -121,6 +109,8 @@ const workspace = () => {
     <PaperComponent>
       <TopBar />
       <Layout title="Taskway | Workspace">
+        <TabComponent />
+        <Toolbar />
         {loading ? (<Loading />) : (
           <Box pt={10}>
             <Grid container spacing={2} align="center" justify="center">

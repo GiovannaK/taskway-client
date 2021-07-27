@@ -61,11 +61,11 @@ const workspaces = () => {
                 variant="h5"
                 className={classes.title}
               >
-                {allWorkspaces.length ? 'Meus Workspaces' : 'Você ainda não tem workspaces'}
+                {allWorkspaces && allWorkspaces.length ? 'Meus Workspaces' : 'Você ainda não tem workspaces'}
               </Typography>
               <Toolbar />
               <GridComponent>
-                {allWorkspaces.length ? (
+                {allWorkspaces && allWorkspaces.length ? (
                   allWorkspaces.map((workspace) => (
                     <Grid
                       item
@@ -97,7 +97,7 @@ const workspaces = () => {
                 variant="h5"
                 className={classes.title}
               >
-                {allWorkspaces.length ? 'Membro em' : 'Você ainda não é membro em nenhum workspace'}
+                {allWorkspaces && allWorkspaces.length ? 'Membro em' : 'Você ainda não é membro em nenhum workspace'}
               </Typography>
               <Toolbar />
               <GridComponent>
