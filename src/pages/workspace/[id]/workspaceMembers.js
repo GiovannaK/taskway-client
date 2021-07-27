@@ -1,8 +1,8 @@
 /* eslint-disable no-nested-ternary */
-import { gql, useQuery } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import {
   Avatar,
-  Box, Card, CardContent, CircularProgress, Divider, Grid, TextField, Typography,
+  Box, Card, CardContent, CircularProgress, Grid, Typography,
 } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -16,6 +16,12 @@ import { TopBar } from '../../../components/TopBar';
 import useStyles from '../../../styles/workspaceMembers';
 import { USERS_WORKSPACE } from '../../../utils/queries/queryUsersWorkspaces';
 
+const REMOVE_USER_FROM_WORKSPACE = gql`
+  mutation removeUserFromWorkspace($workspaceId: ID!, $userId: ID!) {
+  removeUserFromWorkspace(workspaceId: $workspaceId, userId: $userId)
+}
+`;
+
 const workspaceMembers = () => {
   const classes = useStyles();
   const router = useRouter();
@@ -27,6 +33,23 @@ const workspaceMembers = () => {
     variables: {
       id,
     },
+  });
+
+  const [removeUser, { loading }] = useMutation(REMOVE_USER_FROM_WORKSPACE, {
+    update(_, __) {
+      toast.info('Usuário removido com sucesso');
+    },
+    onError(err) {
+      toast.error('Não foi possível remover usuário');
+    },
+    refetchQueries: [
+      {
+        query: USERS_WORKSPACE,
+        variables: {
+          id,
+        },
+      },
+    ],
   });
 
   if (errorUserWorkspaces) {
@@ -74,6 +97,9 @@ const workspaceMembers = () => {
                             >
                               <Avatar
                                 className={classes.avatar}
+                                onClick={() => removeUser(
+                                  { variables: { userId: user.id, workspaceId: id } },
+                                )}
                                 src={user.profile.imageUrl ? user.profile.imageUrl
                                   : ''}
                               />

@@ -1,9 +1,12 @@
 /* eslint-disable no-nested-ternary */
-import { gql, useQuery } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import {
   Avatar, Box, Button, Card, CardContent, IconButton, TextField, Typography,
 } from '@material-ui/core';
+import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { USERS_WORKSPACE } from '../../../utils/queries/queryUsersWorkspaces';
 import { Loading } from '../../Loading';
 import useStyles from './styles';
 
@@ -21,11 +24,39 @@ const SEARCH_QUERY = gql`
   }
 `;
 
+const ADD_USER_TO_WORKSPACE = gql`
+  mutation addUserToWorkspace($workspaceId: ID!, $userId: ID!) {
+    addUserToWorkspace(workspaceId: $workspaceId, userId: $userId){
+     workspaceId
+      userId
+
+    }
+}
+`;
+
 export const AddMember = () => {
   const classes = useStyles();
+  const router = useRouter();
+  const { id } = router.query;
   const [variables, setVariables] = useState({
     query: '',
-    addUserId: '',
+  });
+
+  const [addUser, { loading }] = useMutation(ADD_USER_TO_WORKSPACE, {
+    update(_, __) {
+      toast.info('Usuário adicionado com sucesso');
+    },
+    onError(err) {
+      toast.error('Não foi possível adicionar usuário');
+    },
+    refetchQueries: [
+      {
+        query: USERS_WORKSPACE,
+        variables: {
+          id,
+        },
+      },
+    ],
   });
 
   const cleanFilter = () => {
@@ -33,8 +64,6 @@ export const AddMember = () => {
       ...variables, query: '',
     });
   };
-
-  console.log(variables.addUserId);
 
   const {
     data: { users } = {},
@@ -97,13 +126,12 @@ export const AddMember = () => {
                   className={classes.avatar}
                   key={user.id}
                   value={variables.addUserId}
-                  onClick={(e) => setVariables({ ...variables, addUserId: user.id })}
+                  onClick={() => addUser({ variables: { userId: user.id, workspaceId: id } })}
                   src={user.profile.imageUrl ? user.profile.imageUrl
                     : ''}
                 />
                 <Typography variant="h6" className={classes.typography}>
                   {`${user.firstName} ${user.lastName}`}
-                  Allan A
                 </Typography>
                 <Typography variant="h6">
                   {user.email}
