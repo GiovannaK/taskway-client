@@ -13,6 +13,7 @@ import useStyles from '../styles/workspace';
 import withAuth from '../utils/withAuth';
 import { Loading } from '../components/Loading';
 import { WorkspaceMemberCard } from '../components/WorkspaceMemberCard';
+import { QUERY_WORKSPACE_MEMBER } from '../utils/queries/queryWorkspaceMember';
 
 const WORKSPACES_QUERY = gql`
   query workspaces {
@@ -45,8 +46,19 @@ const workspaces = () => {
     data: { workspaces: allWorkspaces } = {},
   } = useQuery(WORKSPACES_QUERY);
 
+  const {
+    error: errorWorkspaceMember, loading: loadingWorkspaceMember,
+    data: { workspaceMember } = {},
+  } = useQuery(QUERY_WORKSPACE_MEMBER);
+
+  console.log(workspaceMember);
+
   if (error) {
     toast.error('Não foi possível mostrar seus workspaces');
+  }
+
+  if (errorWorkspaceMember) {
+    toast.error('Não foi possível mostrar os workspaces que você é membro');
   }
 
   return (
@@ -54,7 +66,7 @@ const workspaces = () => {
       <PaperComponent>
         <TopBar />
         <Layout title="Taskway | Workspaces">
-          {loading ? (<Loading />) : (
+          {loading || loadingWorkspaceMember ? (<Loading />) : (
             <Box pt={10}>
               <Typography
                 align="center"
@@ -101,9 +113,16 @@ const workspaces = () => {
               </Typography>
               <Toolbar />
               <GridComponent>
-                <Grid item align="center" xs={12} sm={6} md={6} lg={4} xl={4}>
-                  <WorkspaceMemberCard />
-                </Grid>
+                {workspaceMember && workspaceMember.length ? (
+                  workspaceMember.map((workspace) => (
+
+                    <Grid key={workspace.id} item align="center" xs={12} sm={6} md={6} lg={4} xl={4}>
+                      <WorkspaceMemberCard key={workspace.id} workspace={workspace} />
+                    </Grid>
+                  ))
+                ) : (
+                  <></>
+                )}
               </GridComponent>
             </Box>
           )}
