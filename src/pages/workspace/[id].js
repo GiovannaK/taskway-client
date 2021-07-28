@@ -21,7 +21,7 @@ import { TopBar } from '../../components/TopBar';
 import Layout from '../../components/Layout';
 import { Tasks } from '../../components/Workspace/Tasks';
 import { Loading } from '../../components/Loading';
-import withAuth from '../../utils/withAuth';
+import withAuthAndPermission from '../../utils/withAuthAndPermissions';
 import { QUERY_TASKS } from '../../utils/queries/queryTasks';
 import 'moment/locale/pt-br';
 import { usePermission } from '../../hooks/usePermission';
@@ -282,4 +282,4 @@ const workspace = () => {
   );
 };
 
-export default withAuth(workspace);
+export default withAuthAndPermission(workspace);
