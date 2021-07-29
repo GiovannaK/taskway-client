@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
   card: {
     backgroundColor: theme.palette.secondary.main,
   },
+  cardContent: {
+    minHeight: 70,
+  },
   cardHeader: {
     minHeight: 150,
   },

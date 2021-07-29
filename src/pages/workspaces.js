@@ -14,30 +14,8 @@ import withAuth from '../utils/withAuth';
 import { Loading } from '../components/Loading';
 import { WorkspaceMemberCard } from '../components/WorkspaceMemberCard';
 import { QUERY_WORKSPACE_MEMBER } from '../utils/queries/queryWorkspaceMember';
-
-const WORKSPACES_QUERY = gql`
-  query workspaces {
-    workspaces{
-    id
-    title
-    createdAt
-    users{
-      email
-      firstName
-      profile{
-        imageUrl
-      }
-    }
-    owner {
-      profile{
-        id
-        bio
-        imageUrl
-      }
-    }
-  }
-}
-`;
+import { AddWorkspace } from '../components/AddWorkspace';
+import { WORKSPACES_QUERY } from '../utils/queries/workspacesQuery';
 
 const workspaces = () => {
   const classes = useStyles();
@@ -124,6 +102,7 @@ const workspaces = () => {
               </GridComponent>
             </Box>
           )}
+          <AddWorkspace />
         </Layout>
       </PaperComponent>
     </>

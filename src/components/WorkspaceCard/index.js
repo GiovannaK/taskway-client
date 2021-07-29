@@ -42,7 +42,7 @@ export const WorkspaceCard = ({ workspace }) => {
         titleTypographyProps={{ variant: 'h6' }}
         title={workspace.title}
       />
-      <CardContent>
+      <CardContent className={classes.cardContent}>
         <Box display="flex" justifyContent="center">
           {!workspace.users.length && !workspace.users ? (
             <Typography variant="h6" className={classes.member}>

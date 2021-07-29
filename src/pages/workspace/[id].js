@@ -4,7 +4,6 @@ import {
   Box, Grid, Typography,
   Toolbar, Fab, CardContent, Card, InputLabel, Select, MenuItem, Chip, Avatar, Button,
 } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
 import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
 import Link from 'next/link';
