@@ -15,6 +15,7 @@ import { TabComponent } from '../../../components/TabComponent';
 import { TopBar } from '../../../components/TopBar';
 import useStyles from '../../../styles/workspaceMembers';
 import { USERS_WORKSPACE } from '../../../utils/queries/queryUsersWorkspaces';
+import withAuthAndPermission from '../../../utils/withAuthAndPermissions';
 
 const REMOVE_USER_FROM_WORKSPACE = gql`
   mutation removeUserFromWorkspace($workspaceId: ID!, $userId: ID!) {
@@ -126,4 +127,4 @@ const workspaceMembers = () => {
   );
 };
 
-export default workspaceMembers;
+export default withAuthAndPermission(workspaceMembers);

@@ -32,6 +32,7 @@ const workspace = () => {
   const classes = useStyles();
   const router = useRouter();
   const { id } = router.query;
+  const [permissions] = usePermission();
   const [open, setOpen] = useState(false);
   const [variables, setVariables] = useState({
     priority: '',

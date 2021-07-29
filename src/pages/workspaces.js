@@ -51,8 +51,6 @@ const workspaces = () => {
     data: { workspaceMember } = {},
   } = useQuery(QUERY_WORKSPACE_MEMBER);
 
-  console.log(workspaceMember);
-
   if (error) {
     toast.error('Não foi possível mostrar seus workspaces');
   }

@@ -25,11 +25,7 @@ export const usePermission = () => {
   const [permissions, setPermissions] = useState([]);
   const router = useRouter();
   const { id } = router.query;
-  console.log(id);
 
-  if (id !== undefined) {
-    console.log('hdhf');
-  }
   const {
     error, loading,
     data: { userPermissionsByWorkspace: userPermissions } = {},
@@ -43,7 +39,7 @@ export const usePermission = () => {
     <Loading />;
   }
   if (error) {
-    console.log('ERROR', error);
+    <Loading />;
   }
 
   useEffect(() => {
@@ -51,8 +47,6 @@ export const usePermission = () => {
       setPermissions(userPermissions);
     }
   }, [userPermissions]);
-
-  console.log(userPermissions);
 
   return [permissions];
 };

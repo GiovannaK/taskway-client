@@ -9,6 +9,7 @@ import { ProfileInfoCard } from '../components/Profile/ProfileInfoCard';
 import { ProfileEditForm } from '../components/Profile/ProfileEditForm';
 import { ProfileSection } from '../components/Profile/ProfileSection';
 import { ProfileContext } from '../context/ProfileContext';
+import withAuth from '../utils/withAuth';
 
 const profile = () => {
   const { userProfile } = useContext(ProfileContext);
@@ -35,4 +36,4 @@ const profile = () => {
   );
 };
 
-export default profile;
+export default withAuth(profile);

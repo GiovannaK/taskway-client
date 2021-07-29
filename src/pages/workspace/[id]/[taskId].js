@@ -13,6 +13,7 @@ import { TaskCard } from '../../../components/Task/TaskCard';
 import { CommentsCard } from '../../../components/Task/CommentsCard';
 import { SpeedComponent } from '../../../components/Task/SpeedComponent';
 import { Loading } from '../../../components/Loading';
+import withAuthAndPermission from '../../../utils/withAuthAndPermissions';
 /* import { QUERY_TASKS_BY_ID } from '../../../utils/queries/queryTasksById'; */
 
 export const QUERY_TASKS_BY_ID = gql`
@@ -92,4 +93,4 @@ const task = () => {
   );
 };
 
-export default task;
+export default withAuthAndPermission(task);
