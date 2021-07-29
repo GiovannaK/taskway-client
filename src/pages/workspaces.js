@@ -85,7 +85,7 @@ const workspaces = () => {
                 variant="h5"
                 className={classes.title}
               >
-                {allWorkspaces && allWorkspaces.length ? 'Membro em' : 'Você ainda não é membro em nenhum workspace'}
+                {workspaceMember && workspaceMember.length ? 'Membro em' : 'Nenhum convite'}
               </Typography>
               <Toolbar />
               <GridComponent>
@@ -97,7 +97,13 @@ const workspaces = () => {
                     </Grid>
                   ))
                 ) : (
-                  <></>
+                  <>
+                    <img
+                      className={classes.svg}
+                      src="shared.svg"
+                      alt="workspace svg"
+                    />
+                  </>
                 )}
               </GridComponent>
             </Box>

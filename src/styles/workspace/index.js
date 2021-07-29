@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
     zIndex: -1,
   },
   svg: {
-    maxWidth: '60%',
+    maxWidth: '50%',
+    marginBottom: theme.spacing(3),
   },
   subtitle: {
     paddingTop: theme.spacing(2),
