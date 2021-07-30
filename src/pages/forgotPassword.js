@@ -5,14 +5,51 @@ import {
   CardContent, Grid, Hidden, Card, Toolbar, TextField,
 } from '@material-ui/core';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { gql } from '@apollo/client/core';
+import { toast } from 'react-toastify';
+import { useMutation } from '@apollo/client';
 import Layout from '../components/Layout';
 import { LoginPaper } from '../components/LoginPaper';
 import useStyles from '../styles/forgotPassword';
+import { forgotPasswordValidation } from '../utils/forgotPasswordValidation';
+
+const FORGOT_PASSWORD = gql`
+  mutation forgotPassword($email: String!){
+    userForgotPassword(email: $email){
+      id
+    }
+  }
+`;
 
 const forgotPassword = () => {
   const classes = useStyles();
+  const [variables, setVariables] = useState({
+    email: '',
+  });
+
+  const [forgotPass, { loading }] = useMutation(FORGOT_PASSWORD, {
+    update(_, __) {
+      toast.info(`Um e-mail para redefinir a senha foi enviado para ${variables.email}`);
+    },
+    onError(err) {
+      toast.error('Não foi possível enviar e-mail para redefinir a senha, Você já tem uma conta?');
+    },
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const hasInvalidFields = forgotPasswordValidation(variables.email);
+
+    if (hasInvalidFields) {
+      // eslint-disable-next-line no-useless-return
+      return;
+    }
+
+    forgotPass({ variables });
+  };
+
   return (
     <LoginPaper>
       <img src="animated_wave.svg" alt="waves" className={classes.images} />
@@ -39,7 +76,7 @@ const forgotPassword = () => {
                   >
                     Esqueci a senha
                   </Typography>
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <TextField
                       required
                       id="email"
@@ -51,14 +88,17 @@ const forgotPassword = () => {
                       InputLabelProps={{
                         className: classes.label,
                       }}
+                      value={variables.email}
+                      onChange={(e) => setVariables({ ...variables, email: e.target.value })}
                     />
                     <Button
                       type="submit"
                       className={classes.button}
                       variant="outlined"
+                      disabled={loading}
                     >
                       <Typography variant="h6">
-                        Enviar
+                        {loading ? 'Enviando...' : 'Enviar'}
                       </Typography>
                     </Button>
                     <Hidden smDown>
