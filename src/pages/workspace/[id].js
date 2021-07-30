@@ -99,6 +99,7 @@ const workspace = () => {
       priority: variables.priority,
       maxDate: variables.maxDate,
     },
+    pollInterval: 1000,
   });
 
   if (error) {

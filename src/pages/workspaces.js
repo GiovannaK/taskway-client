@@ -27,7 +27,9 @@ const workspaces = () => {
   const {
     error: errorWorkspaceMember, loading: loadingWorkspaceMember,
     data: { workspaceMember } = {},
-  } = useQuery(QUERY_WORKSPACE_MEMBER);
+  } = useQuery(QUERY_WORKSPACE_MEMBER, {
+    pollInterval: 1000,
+  });
 
   if (error) {
     toast.error('Não foi possível mostrar seus workspaces');

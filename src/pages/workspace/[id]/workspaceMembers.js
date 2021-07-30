@@ -34,6 +34,7 @@ const workspaceMembers = () => {
     variables: {
       id,
     },
+    pollInterval: 1000,
   });
 
   const [removeUser, { loading }] = useMutation(REMOVE_USER_FROM_WORKSPACE, {
