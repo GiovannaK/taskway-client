@@ -4,14 +4,20 @@ export const QUERY_USERS_PERMISSIONS = gql`
   query usersPermissionsByWorkspace($workspaceId: ID!) {
   usersPermissionsByWorkspace(workspaceId: $workspaceId){
     id
-    name
-    permissions_users{
+    title
+    workspaces_permissions{
       id
-      firstName
-      lastName
-      email
-      profile{
-        imageUrl
+      user_permission{
+        firstName
+        lastName
+        id
+        profile{
+          imageUrl
+        }
+      }
+      permissions{
+        id
+        name
       }
     }
   }

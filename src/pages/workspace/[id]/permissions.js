@@ -105,7 +105,8 @@ const permissions = () => {
           <Box pt={10}>
             <Grid container spacing={1} justify="center">
               <Grid item xs={12} sm={12} md={10} lg={6} xl={6}>
-                {!usersPermissions || !usersPermissions.length ? (
+                {!usersPermissions
+                || !usersPermissions.workspaces_permissions.length ? (
                   <Card>
                     <CardContent>
                       <Toolbar />
@@ -119,106 +120,59 @@ const permissions = () => {
                       </Typography>
                     </CardContent>
                   </Card>
-                ) : (
-                  <Card className={classes.card}>
-                    <CardHeader
-                      titleTypographyProps={{ variant: 'h5' }}
-                      title="Gerenciar Permissões"
-                      align="center"
-                      classes={{ title: classes.headerTitle }}
-                    />
-                    <Divider />
-                    <CardContent>
-                      <Box align="center" pb={2}>
-                        {usersPermissions[0] && (
-                          usersPermissions[0].permissions_users.map((user) => (
-
-                            <Chip
-                              className={classes.avatar}
-                              key={user.id}
-                              value={variables.userId}
-                              onClick={(e) => {
-                                setVariables({
-                                  ...variables,
-                                  userId: user.id,
-                                  permissionId: usersPermissions[0].id,
-                                });
-                                handleOpenDialog();
-                              }}
-                              avatar={(
-                                <Avatar
-                                  key={user.id}
-                                  src={user.profile.imageUrl ? user.profile.imageUrl
-                                    : ''}
-                                />
+                  ) : (
+                    <Card className={classes.card}>
+                      <CardHeader
+                        titleTypographyProps={{ variant: 'h5' }}
+                        title="Gerenciar Permissões"
+                        align="center"
+                        classes={{ title: classes.headerTitle }}
+                      />
+                      <Divider />
+                      <CardContent>
+                        <Box align="center" pb={2}>
+                          {usersPermissions.workspaces_permissions && (
+                            usersPermissions.workspaces_permissions.map((user) => (
+                              <Chip
+                                className={classes.avatar}
+                                key={user.user_permission.id}
+                                value={variables.userId}
+                                onClick={(e) => {
+                                  setVariables({
+                                    ...variables,
+                                    userId: user.user_permission.id,
+                                    permissionId: user.permissions.id,
+                                  });
+                                  handleOpenDialog();
+                                }}
+                                avatar={(
+                                  <Avatar
+                                    key={user.user_permission.id}
+                                    src={user.user_permission.profile.imageUrl
+                                      ? user.user_permission.profile.imageUrl
+                                      : ''}
+                                  />
                               )}
-                              label={`${user.firstName} ${user.lastName} - Adicionar Tarefa`}
-                              clickable
-                            />
-                          ))
-                        )}
-                      </Box>
-                      <Box align="center" pb={2}>
-                        {usersPermissions[1] && (
-                          usersPermissions[1].permissions_users.map((user) => (
-
-                            <Chip
-                              className={classes.avatar}
-                              key={user.id}
-                              value={variables.userId}
-                              onClick={(e) => {
-                                setVariables({
-                                  ...variables,
-                                  userId: user.id,
-                                  permissionId: usersPermissions[1].id,
-                                });
-                                handleOpenDialog();
-                              }}
-                              avatar={(
-                                <Avatar
-                                  key={user.id}
-                                  src={user.profile.imageUrl ? user.profile.imageUrl
-                                    : ''}
-                                />
-                              )}
-                              label={`${user.firstName} ${user.lastName} - Editar Tarefa`}
-                              clickable
-                            />
-                          ))
-                        )}
-                      </Box>
-                      <Box align="center">
-                        {usersPermissions[2] && (
-                          usersPermissions[2].permissions_users.map((user) => (
-
-                            <Chip
-                              className={classes.avatar}
-                              key={user.id}
-                              value={variables.userId}
-                              onClick={(e) => {
-                                setVariables({
-                                  ...variables,
-                                  userId: user.id,
-                                  permissionId: usersPermissions[2].id,
-                                });
-                                handleOpenDialog();
-                              }}
-                              avatar={(
-                                <Avatar
-                                  key={user.id}
-                                  src={user.profile.imageUrl ? user.profile.imageUrl
-                                    : ''}
-                                />
-                              )}
-                              label={`${user.firstName} ${user.lastName} - Excluir Tarefa`}
-                              clickable
-                            />
-                          ))
-                        )}
-                      </Box>
-                    </CardContent>
-                  </Card>
-                )}
+                                label={`${user.user_permission.firstName}
+                                ${user.user_permission.lastName} - ${
+                                  (() => {
+                                    if (user.permissions.name === 'createTask') {
+                                      return 'Adicionar Tarefa';
+                                    }
+                                    if (user.permissions.name === 'deleteTask') {
+                                      return 'Excluir tarefas';
+                                    }
+                                    return 'Atualizar tarefas';
+                                  })()
+                                }`}
+                                clickable
+                              />
+                            ))
+                          )}
+                        </Box>
+                      </CardContent>
+                    </Card>
+                  )}
               </Grid>
               <Grid item xs={12} sm={12} md={10} lg={6} xl={6}>
                 <AddPermissionForm />
