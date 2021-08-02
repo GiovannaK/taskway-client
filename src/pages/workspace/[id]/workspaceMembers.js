@@ -14,6 +14,7 @@ import { PaperComponent } from '../../../components/PaperComponent';
 import { TabComponent } from '../../../components/TabComponent';
 import { TopBar } from '../../../components/TopBar';
 import useStyles from '../../../styles/workspaceMembers';
+import { QUERY_USERS_PERMISSIONS } from '../../../utils/queries/queryUsersPermissions';
 import { USERS_WORKSPACE } from '../../../utils/queries/queryUsersWorkspaces';
 import withAuthAndPermission from '../../../utils/withAuthAndPermissions';
 
@@ -49,6 +50,12 @@ const workspaceMembers = () => {
         query: USERS_WORKSPACE,
         variables: {
           id,
+        },
+      },
+      {
+        query: QUERY_USERS_PERMISSIONS,
+        variables: {
+          workspaceId: id,
         },
       },
     ],
