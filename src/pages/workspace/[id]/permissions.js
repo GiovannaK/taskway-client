@@ -22,6 +22,7 @@ import { AddPermissionForm } from '../../../components/permissions/AddPermission
 import { Loading } from '../../../components/Loading';
 import { QUERY_USERS_PERMISSIONS } from '../../../utils/queries/queryUsersPermissions';
 import withAuth from '../../../utils/withAuth';
+import withAuthAndIsOwner from '../../../utils/withAuthAndIsOwner';
 
 const DELETE_PERMISSIONS = gql`
   mutation removeUserPermission($workspaceId: ID!, $userId: ID!, $permissionId: ID!) {
@@ -207,4 +208,4 @@ const permissions = () => {
   );
 };
 
-export default withAuth(permissions);
+export default withAuthAndIsOwner(permissions);
