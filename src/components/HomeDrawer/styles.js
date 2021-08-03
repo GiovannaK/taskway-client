@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    background: theme.palette.secondary.main,
+    background: 'rgba(0,0,0,0.6)',
   },
   drawerHeader: {
     display: 'flex',

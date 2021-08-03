@@ -16,6 +16,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import PersonIcon from '@material-ui/icons/Person';
+import Link from 'next/link';
 import useStyles from './styles';
 import { Navbar } from '../Navbar';
 import { Loading } from '../Loading';
@@ -61,7 +62,9 @@ export const HomeTopBar = () => {
     }
   };
 
-  window.addEventListener('scroll', handleTopBar);
+  if (process.browser) {
+    window.addEventListener('scroll', handleTopBar);
+  }
 
   return (
     <>
@@ -72,11 +75,13 @@ export const HomeTopBar = () => {
       >
         <Box display="flex" className={classes.box}>
           <Toolbar>
-            <IconButton
-              onClick={() => setOpenDrawer(true)}
-            >
-              <MenuIcon fontSize="large" className={classes.fontColors} />
-            </IconButton>
+            <Hidden mdUp>
+              <IconButton
+                onClick={() => setOpenDrawer(true)}
+              >
+                <MenuIcon fontSize="large" className={classes.fontColors} />
+              </IconButton>
+            </Hidden>
             <Toolbar>
               <Typography
                 variant="h4"
@@ -92,22 +97,26 @@ export const HomeTopBar = () => {
           </Toolbar>
           <Hidden smDown>
             <Toolbar>
-              <Button
-                variant="contained"
-                className={classes.loginButton}
-                startIcon={<PersonIcon className={classes.buttonIcons} />}
-              >
-                <Typography variant="h6" className={classes.typographyButtons}>
-                  Login
-                </Typography>
-              </Button>
-              {userProfile.user
-              && (
-              <Tooltip title="Sair">
-                <IconButton className={classes.Icons} onClick={handleLogout}>
-                  <ExitToAppIcon fontSize="large" />
-                </IconButton>
-              </Tooltip>
+              {!userProfile || !userProfile.user ? (
+
+                <Link href="/login">
+                  <Button
+                    variant="contained"
+                    className={classes.loginButton}
+                    startIcon={<PersonIcon className={classes.buttonIcons} />}
+                  >
+                    <Typography variant="h6" className={classes.typographyButtons}>
+                      Login
+                    </Typography>
+                  </Button>
+                </Link>
+              ) : (
+
+                <Tooltip title="Sair">
+                  <IconButton className={classes.Icons} onClick={handleLogout}>
+                    <ExitToAppIcon fontSize="large" />
+                  </IconButton>
+                </Tooltip>
               )}
             </Toolbar>
           </Hidden>

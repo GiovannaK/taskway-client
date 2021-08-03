@@ -2,6 +2,7 @@ import {
   Box, Button, Hidden, Paper, Toolbar, Typography,
 } from '@material-ui/core';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import React from 'react';
 import { allWords } from './animation';
 import useStyles from './styles';
@@ -31,11 +32,13 @@ export const HeroSection = () => {
             em tempo real
           </Typography>
           <Toolbar />
-          <Button variant="outlined" className={classes.signUpButton}>
-            <Typography variant="h5" className={classes.typographySignUp}>
-              Crie uma conta
-            </Typography>
-          </Button>
+          <Link href="/register">
+            <Button variant="outlined" className={classes.signUpButton}>
+              <Typography variant="h5" className={classes.typographySignUp}>
+                Crie uma conta
+              </Typography>
+            </Button>
+          </Link>
           <Box className={classes.laptopBox} display="flex" pt={3}>
             <img src="laptop.png" alt="laptop" className={classes.laptop} />
           </Box>
