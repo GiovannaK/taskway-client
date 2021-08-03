@@ -1,7 +1,9 @@
 import {
   Box, Button, Hidden, Paper, Toolbar, Typography,
 } from '@material-ui/core';
+import { motion } from 'framer-motion';
 import React from 'react';
+import { allWords } from './animation';
 import useStyles from './styles';
 
 export const HeroSection = () => {
@@ -16,9 +18,11 @@ export const HeroSection = () => {
           alignItems="center"
           className={classes.box}
         >
-          <Typography variant="h1" align="center" className={classes.title}>
-            Colabore e atribua tarefas
-          </Typography>
+          <motion.h1 variants={allWords} initial="hidden" animate="visible">
+            <Typography variant="h1" align="center" className={classes.title}>
+              Colabore e atribua tarefas
+            </Typography>
+          </motion.h1>
           <Typography
             variant="h1"
             className={classes.title}
