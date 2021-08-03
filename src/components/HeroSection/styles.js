@@ -10,13 +10,13 @@ const useStyles = makeStyles((theme) => ({
       minHeight: '100vh',
     },
     [theme.breakpoints.down('md')]: {
-      minHeight: '100vh',
+      minHeight: '80vh',
     },
     [theme.breakpoints.down('sm')]: {
       minHeight: '80vh',
     },
     [theme.breakpoints.down('xs')]: {
-      minHeight: '80vh',
+      minHeight: '60vh',
     },
   },
   title: {
@@ -42,13 +42,13 @@ const useStyles = makeStyles((theme) => ({
       paddingTop: theme.spacing(20),
     },
     [theme.breakpoints.down('md')]: {
-      paddingTop: theme.spacing(25),
+      paddingTop: theme.spacing(22),
     },
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(25),
     },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(15),
+      paddingTop: theme.spacing(10),
     },
   },
   signUpButton: {
@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
     borderColor: theme.palette.secondary.light,
     [theme.breakpoints.down('xl')]: {
       padding: '15px 40px',
+      marginBottom: theme.spacing(3),
     },
     [theme.breakpoints.down('md')]: {
       padding: '10px 40px',
@@ -73,6 +74,21 @@ const useStyles = makeStyles((theme) => ({
   waveSvg: {
     bottom: 0,
     position: 'absolute',
+  },
+  laptop: {
+    [theme.breakpoints.down('xl')]: {
+      maxWidth: '30%',
+    },
+    [theme.breakpoints.down('md')]: {
+      maxWidth: '50%',
+    },
+    [theme.breakpoints.down('sm')]: {
+      maxWidth: '50%',
+    },
+    [theme.breakpoints.down('xs')]: {
+      maxWidth: '60%',
+    },
+    zIndex: 2,
   },
 }));
 

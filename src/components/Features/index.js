@@ -100,6 +100,7 @@ export const Features = () => {
             </Grid>
           </Grid>
         </Box>
+        <Toolbar />
       </Container>
     </Paper>
   );

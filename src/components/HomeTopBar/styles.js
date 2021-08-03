@@ -5,6 +5,10 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     background: 'transparent',
   },
+  ActiveAppBar: {
+    width: '100%',
+    background: 'rgba(0,0,0,0.7)',
+  },
   logo: {
     fontWeight: 'bold',
   },

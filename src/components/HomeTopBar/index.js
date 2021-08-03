@@ -30,8 +30,9 @@ const LOGOUT = gql`
 
 export const HomeTopBar = () => {
   const router = useRouter();
-  const classes = useStyles();
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [topBar, setTopBar] = useState(false);
+  const classes = useStyles();
   const { userProfile, USER_PROFILE } = useContext(ProfileContext);
 
   const [logoutUser, { loading }] = useMutation(LOGOUT, {
@@ -52,11 +53,21 @@ export const HomeTopBar = () => {
     logoutUser();
   };
 
+  const handleTopBar = () => {
+    if (window.scrollY >= 80) {
+      setTopBar(true);
+    } else {
+      setTopBar(false);
+    }
+  };
+
+  window.addEventListener('scroll', handleTopBar);
+
   return (
     <>
       <AppBar
         position="fixed"
-        className={classes.AppBar}
+        className={topBar ? classes.ActiveAppBar : classes.AppBar}
         elevation={0}
       >
         <Box display="flex" className={classes.box}>

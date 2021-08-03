@@ -36,6 +36,9 @@ export const HeroSection = () => {
               Crie uma conta
             </Typography>
           </Button>
+          <Box className={classes.laptopBox} display="flex" pt={3}>
+            <img src="laptop.png" alt="laptop" className={classes.laptop} />
+          </Box>
           <Hidden mdDown>
             <img src="wave.svg" alt="wave" className={classes.waveSvg} />
           </Hidden>
