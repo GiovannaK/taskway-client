@@ -1,0 +1,42 @@
+import {
+  Box, Button, Hidden, Paper, Toolbar, Typography,
+} from '@material-ui/core';
+import React from 'react';
+import useStyles from './styles';
+
+export const HeroSection = () => {
+  const classes = useStyles();
+  return (
+    <Paper classes={{ root: classes.paperRoot }} elevation={0} square>
+      <Box pt={4}>
+        <Box
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          className={classes.box}
+        >
+          <Typography variant="h1" align="center" className={classes.title}>
+            Colabore e atribua tarefas
+          </Typography>
+          <Typography
+            variant="h1"
+            className={classes.title}
+            align="center"
+          >
+            em tempo real
+          </Typography>
+          <Toolbar />
+          <Button variant="outlined" className={classes.signUpButton}>
+            <Typography variant="h5" className={classes.typographySignUp}>
+              Crie uma conta
+            </Typography>
+          </Button>
+          <Hidden mdDown>
+            <img src="wave.svg" alt="wave" className={classes.waveSvg} />
+          </Hidden>
+        </Box>
+      </Box>
+    </Paper>
+  );
+};

@@ -1,4 +1,3 @@
-/* eslint-disable react/self-closing-comp */
 import {
   Drawer,
   IconButton,
@@ -19,7 +18,7 @@ import Link from 'next/link';
 import useStyles from './styles';
 import { ProfileContext } from '../../context/ProfileContext';
 
-export const Navbar = ({ openDrawer, setOpenDrawer, logoutUser }) => {
+export const HomeDrawer = ({ openDrawer, setOpenDrawer, logoutUser }) => {
   const classes = useStyles();
   const { userProfile } = useContext(ProfileContext);
   return (
@@ -40,32 +39,11 @@ export const Navbar = ({ openDrawer, setOpenDrawer, logoutUser }) => {
           className={classes.chevronIcon}
         />
       </IconButton>
-      {userProfile.user
-      && (
-      <>
-        <List>
-          <Link href="/workspaces">
-            <ListItem button>
-              <ListItemIcon>
-                <DashboardIcon className={classes.listIcons} />
-              </ListItemIcon>
-              <ListItemText>
-                <Typography
-                  variant="h6"
-                  color="primary"
-                  className={classes.typography}
-                >
-                  Workspaces
-                </Typography>
-              </ListItemText>
-            </ListItem>
-          </Link>
-        </List>
-        <Divider />
-        <List>
+      <List>
+        <Link href="/workspaces">
           <ListItem button>
             <ListItemIcon>
-              <SettingsIcon className={classes.listIcons} />
+              <DashboardIcon className={classes.listIcons} />
             </ListItemIcon>
             <ListItemText>
               <Typography
@@ -73,30 +51,46 @@ export const Navbar = ({ openDrawer, setOpenDrawer, logoutUser }) => {
                 color="primary"
                 className={classes.typography}
               >
-                Configurações
+                Workspaces
               </Typography>
             </ListItemText>
           </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <ExitToAppIcon className={classes.listIcons} />
-            </ListItemIcon>
-            <ListItemText onClick={logoutUser}>
-              <Typography
-                variant="h6"
-                color="primary"
-                className={classes.typography}
-              >
-                Sair
-              </Typography>
-            </ListItemText>
-          </ListItem>
-        </List>
-      </>
-      )}
+        </Link>
+      </List>
+      <Divider />
+      <List>
+        <ListItem button>
+          <ListItemIcon>
+            <SettingsIcon className={classes.listIcons} />
+          </ListItemIcon>
+          <ListItemText>
+            <Typography
+              variant="h6"
+              color="primary"
+              className={classes.typography}
+            >
+              Configurações
+            </Typography>
+          </ListItemText>
+        </ListItem>
+      </List>
+      <Divider />
+      <List>
+        <ListItem button>
+          <ListItemIcon>
+            <ExitToAppIcon className={classes.listIcons} />
+          </ListItemIcon>
+          <ListItemText onClick={logoutUser}>
+            <Typography
+              variant="h6"
+              color="primary"
+              className={classes.typography}
+            >
+              Sair
+            </Typography>
+          </ListItemText>
+        </ListItem>
+      </List>
       {userProfile && (
 
       <List className={classes.avatarSection}>

@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import {
   AppBar,
   Box,
@@ -16,10 +15,12 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
+import PersonIcon from '@material-ui/icons/Person';
 import useStyles from './styles';
 import { Navbar } from '../Navbar';
 import { Loading } from '../Loading';
 import { ProfileContext } from '../../context/ProfileContext';
+import { HomeDrawer } from '../HomeDrawer';
 
 const LOGOUT = gql`
   mutation userLogout{
@@ -27,7 +28,7 @@ const LOGOUT = gql`
   }
 `;
 
-export const TopBar = () => {
+export const HomeTopBar = () => {
   const router = useRouter();
   const classes = useStyles();
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -56,6 +57,7 @@ export const TopBar = () => {
       <AppBar
         position="fixed"
         className={classes.AppBar}
+        elevation={0}
       >
         <Box display="flex" className={classes.box}>
           <Toolbar>
@@ -77,22 +79,30 @@ export const TopBar = () => {
               </Typography>
             </Toolbar>
           </Toolbar>
-          {userProfile.user
-
-          && (
-          <Hidden mdDown>
+          <Hidden smDown>
             <Toolbar>
+              <Button
+                variant="contained"
+                className={classes.loginButton}
+                startIcon={<PersonIcon className={classes.buttonIcons} />}
+              >
+                <Typography variant="h6" className={classes.typographyButtons}>
+                  Login
+                </Typography>
+              </Button>
+              {userProfile.user
+              && (
               <Tooltip title="Sair">
                 <IconButton className={classes.Icons} onClick={handleLogout}>
                   <ExitToAppIcon fontSize="large" />
                 </IconButton>
               </Tooltip>
+              )}
             </Toolbar>
           </Hidden>
-          )}
         </Box>
       </AppBar>
-      <Navbar openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} logoutUser={logoutUser} />
+      <HomeDrawer openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} logoutUser={logoutUser} />
     </>
   );
 };
