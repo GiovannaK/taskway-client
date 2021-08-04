@@ -7,7 +7,7 @@ import useStyles from './styles';
 export const FooterSection = () => {
   const classes = useStyles();
   return (
-    <Paper classes={{ root: classes.paperRoot }} elevation={0} square>
+    <Paper classes={{ root: classes.paperRoot }} elevation={0} square id="follow">
       <Container>
         <Box pt={3} pb={3}>
           <Typography

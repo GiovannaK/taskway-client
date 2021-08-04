@@ -32,6 +32,18 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     width: drawerWidth,
   },
+  signUp: {
+    cursor: 'pointer',
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    color: theme.palette.secondary.light,
+    transition: '0.3s ease-in',
+    '&:hover': {
+      color: theme.palette.primary.dark,
+    },
+    marginRight: theme.spacing(2),
+  },
 }));
 
 export default useStyles;

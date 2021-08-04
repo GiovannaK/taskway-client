@@ -15,7 +15,18 @@ const useStyles = makeStyles((theme) => ({
   fontColors: {
     color: theme.palette.secondary.main,
   },
-
+  signUp: {
+    cursor: 'pointer',
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    color: theme.palette.secondary.light,
+    transition: '0.3s ease-in',
+    '&:hover': {
+      color: theme.palette.primary.dark,
+    },
+    marginRight: theme.spacing(2),
+  },
   box: {
     justifyContent: 'space-between',
   },

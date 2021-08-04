@@ -8,7 +8,7 @@ import useStyles from './styles';
 export const Features = () => {
   const classes = useStyles();
   return (
-    <Paper classes={{ root: classes.paperRoot }} elevation={0} square>
+    <Paper classes={{ root: classes.paperRoot }} elevation={0} square id="explore">
       <Container>
         <Box pt={5}>
           <Typography

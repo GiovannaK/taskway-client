@@ -17,8 +17,8 @@ import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import PersonIcon from '@material-ui/icons/Person';
 import Link from 'next/link';
+import { Link as LinkScroll } from 'react-scroll';
 import useStyles from './styles';
-import { Navbar } from '../Navbar';
 import { Loading } from '../Loading';
 import { ProfileContext } from '../../context/ProfileContext';
 import { HomeDrawer } from '../HomeDrawer';
@@ -97,6 +97,15 @@ export const HomeTopBar = () => {
           </Toolbar>
           <Hidden smDown>
             <Toolbar>
+              <LinkScroll duration={1000} smooth to="account" className={classes.signUp}>
+                Crie uma conta
+              </LinkScroll>
+              <LinkScroll duration={1000} smooth to="explore" className={classes.signUp}>
+                Explore
+              </LinkScroll>
+              <LinkScroll duration={1000} smooth to="follow" className={classes.signUp}>
+                Siga-nos
+              </LinkScroll>
               {!userProfile || !userProfile.user ? (
 
                 <Link href="/login">

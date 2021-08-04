@@ -10,7 +10,7 @@ import useStyles from './styles';
 export const HeroSection = () => {
   const classes = useStyles();
   return (
-    <Paper classes={{ root: classes.paperRoot }} elevation={0} square>
+    <Paper classes={{ root: classes.paperRoot }} elevation={0} square id="account">
       <Box pt={4}>
         <Box
           display="flex"
