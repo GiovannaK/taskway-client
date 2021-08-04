@@ -4,13 +4,15 @@ import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 
 const wsLink = process.browser ? new WebSocketLink({
-  uri: 'ws://localhost:4000/graphql',
+  uri: process.env.NEXT_PUBLIC_WEBSOCKET_URL,
   options: {
     reconnect: true,
   },
 }) : null;
 
-const link = createUploadLink({ uri: 'http://localhost:4000/graphql', credentials: 'include' });
+const linkUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+const link = createUploadLink({ uri: linkUrl, credentials: 'include' });
 
 const splitLink = process.browser ? split(
   ({ query }) => {
