@@ -1,9 +1,14 @@
-export const allWords = {
-  hidden: { x: -100 },
+export const titleAnimation = {
+  hidden: { x: -1000 },
   visible: {
     x: 0,
-    Transition: {
-      ease: 'easeOut',
-    },
+  },
+};
+
+export const laptopAnimation = {
+  hidden: { x: -1000 },
+  visible: {
+    x: 0,
+    zIndex: 2,
   },
 };

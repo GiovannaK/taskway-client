@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   box: {
     [theme.breakpoints.down('xl')]: {
-      paddingTop: theme.spacing(20),
+      paddingTop: theme.spacing(15),
     },
     [theme.breakpoints.down('md')]: {
       paddingTop: theme.spacing(22),
