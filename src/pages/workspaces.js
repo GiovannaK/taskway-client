@@ -117,4 +117,4 @@ const workspaces = () => {
   );
 };
 
-export default withAuth(workspaces);
+export default workspaces;
