@@ -30,7 +30,7 @@ export default function withAuthAndPermission(WrappedComponent) {
     }, [hasPermissionToAccessWorkspace]);
 
     useEffect(() => {
-      const authCookie = Cookie.get('logged');
+      const authCookie = Cookie.get('isLogged');
 
       if (!authCookie) {
         router.replace('/login');

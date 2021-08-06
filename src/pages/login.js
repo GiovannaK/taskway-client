@@ -3,6 +3,7 @@ import {
   Typography,
   Box, Card, CardContent, Grid, TextField, Toolbar, Button,
 } from '@material-ui/core';
+import Cookie from 'js-cookie';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -33,6 +34,9 @@ const login = () => {
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(_, __) {
+      Cookie.set('isLogged', true, {
+        expires: 7,
+      });
       router.push('/workspaces');
     },
     onError(err) {

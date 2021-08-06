@@ -5,10 +5,8 @@ import Cookie from 'js-cookie';
 export default function withAuth(WrappedComponent) {
   const Wrapper = (props) => {
     const router = useRouter();
-    const cook = Cookie.get('logged');
-    console.log(cook);
     useEffect(() => {
-      const authCookie = Cookie.get('logged');
+      const authCookie = Cookie.get('isLogged');
 
       if (!authCookie) {
         router.replace('/login');

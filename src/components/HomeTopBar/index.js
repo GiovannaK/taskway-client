@@ -17,6 +17,7 @@ import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import PersonIcon from '@material-ui/icons/Person';
 import Link from 'next/link';
+import Cookie from 'js-cookie';
 import { Link as LinkScroll } from 'react-scroll';
 import useStyles from './styles';
 import { Loading } from '../Loading';
@@ -42,6 +43,7 @@ export const HomeTopBar = () => {
     },
     onCompleted(data) {
       /* router.push('/login'); */
+      Cookie.remove('isLogged');
       window.location.href = '/login';
     },
   });

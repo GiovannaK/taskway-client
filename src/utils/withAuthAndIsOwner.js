@@ -35,7 +35,7 @@ export default function withAuthAndIsOwner(WrappedComponent) {
     }, [isOwnerToAccess]);
 
     useEffect(() => {
-      const authCookie = Cookie.get('logged');
+      const authCookie = Cookie.get('isLogged');
 
       if (!authCookie) {
         router.replace('/login');

@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import React, { useContext, useState } from 'react';
 import EventNoteIcon from '@material-ui/icons/EventNote';
+import Cookie from 'js-cookie';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { gql, useMutation } from '@apollo/client';
@@ -39,6 +40,7 @@ export const TopBar = () => {
     },
     onCompleted(data) {
       /* router.push('/login'); */
+      Cookie.remove('isLogged');
       window.location.href = '/login';
     },
   });
