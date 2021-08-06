@@ -7,6 +7,7 @@ const wsLink = process.browser ? new WebSocketLink({
   uri: process.env.NEXT_PUBLIC_WEBSOCKET_URL,
   options: {
     reconnect: true,
+    timeout: 30000,
   },
 }) : null;
 

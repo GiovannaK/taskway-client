@@ -45,7 +45,7 @@ const activateAccount = () => {
       <Layout title="Taskway | Ativar conta">
         <Box pt={5}>
           <Grid container align="center" justify="center">
-            <Hidden mdDown>
+            <Hidden lgDown>
               <Grid item xs={12} sm={12} md={4} lg={6} xl={6}>
                 <Card className={classes.card} square>
                   <CardContent>
