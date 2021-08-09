@@ -23,6 +23,7 @@ import { Loading } from '../../../components/Loading';
 import { QUERY_USERS_PERMISSIONS } from '../../../utils/queries/queryUsersPermissions';
 import withAuth from '../../../utils/withAuth';
 import withAuthAndIsOwner from '../../../utils/withAuthAndIsOwner';
+import { RemoveWorkspace } from '../../../components/permissions/removeWorkspace/removeWorkspace';
 
 const DELETE_PERMISSIONS = gql`
   mutation removeUserPermission($workspaceId: ID!, $userId: ID!, $permissionId: ID!) {
@@ -202,6 +203,7 @@ const permissions = () => {
               </Button>
             </DialogActions>
           </Dialog>
+          <RemoveWorkspace />
         </Layout>
       </PaperComponent>
     </>
