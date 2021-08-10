@@ -50,6 +50,13 @@ const useStyles = makeStyles((theme) => ({
   fallback: {
     paddingTop: theme.spacing(2),
   },
+  messageText: {
+    fontSize: '1.2rem',
+  },
+  name: {
+    fontSize: '0.9rem',
+    paddingTop: theme.spacing(1),
+  },
 }));
 
 export default useStyles;

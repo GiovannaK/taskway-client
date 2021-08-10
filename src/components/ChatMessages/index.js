@@ -152,6 +152,9 @@ export const ChatMessage = () => {
                                 {message && message.body}
                               </Typography>
                             </Box>
+                            <Typography variant="h5" className={classes.name}>
+                              {message && `${message.messages_user.firstName} ${message.messages_user.lastName}`}
+                            </Typography>
                           </CardContent>
                         </Card>
                       </Grid>
