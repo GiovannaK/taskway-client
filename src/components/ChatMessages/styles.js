@@ -44,6 +44,12 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '100%',
   },
+  svg: {
+    maxWidth: '50%',
+  },
+  fallback: {
+    paddingTop: theme.spacing(2),
+  },
 }));
 
 export default useStyles;

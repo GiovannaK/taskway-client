@@ -158,7 +158,16 @@ export const ChatMessage = () => {
                     ))
 
                   ) : (
-                    <Typography aling="center" variant="h5">Sem mensagens</Typography>
+                    <Box
+                      pt={10}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      flexDirection="column"
+                    >
+                      <img className={classes.svg} src="../../../noMessages.svg" alt="message fallback" />
+                      <Typography variant="h6" className={classes.fallback}>Sem mensagens</Typography>
+                    </Box>
                   )
                 )}
               </Grid>

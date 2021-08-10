@@ -27,6 +27,7 @@ export const RoomProvider = ({ children }) => {
     variables: {
       workspaceId: id,
     },
+    pollInterval: 4000,
   });
 
   if (error) {
