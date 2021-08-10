@@ -6,6 +6,7 @@ import { PaperComponent } from '../../../../components/PaperComponent';
 import { TabComponent } from '../../../../components/TabComponent';
 import { TopBar } from '../../../../components/TopBar';
 import useStyles from '../../../../styles/chat';
+import withAuthAndPermission from '../../../../utils/withAuthAndPermissions';
 
 const chat = () => {
   const classes = useStyles();
@@ -22,4 +23,4 @@ const chat = () => {
   );
 };
 
-export default chat;
+export default withAuthAndPermission(chat);
