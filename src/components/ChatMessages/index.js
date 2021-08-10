@@ -158,7 +158,7 @@ export const ChatMessage = () => {
                     ))
 
                   ) : (
-                    <Typography>Sem mensagens</Typography>
+                    <Typography aling="center" variant="h5">Sem mensagens</Typography>
                   )
                 )}
               </Grid>
