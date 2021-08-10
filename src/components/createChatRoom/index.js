@@ -6,9 +6,9 @@ import {
   DialogContent, DialogContentText, Divider, Grid, Typography,
 } from '@material-ui/core';
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
+import React from 'react';
 import { toast } from 'react-toastify';
-import { RoomContext } from '../../context/RoomContext';
+import { ROOM } from '../../utils/queries/createRoomQuery';
 import useStyles from './styles';
 
 const CREATE_ROOM = gql`
@@ -21,7 +21,6 @@ export const CreateChatRoom = () => {
   const classes = useStyles();
   const router = useRouter();
   const { id } = router.query;
-  const { ROOM } = useContext(RoomContext);
 
   const [createRoom, { loading }] = useMutation(CREATE_ROOM, {
     update(_, __) {

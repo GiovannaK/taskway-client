@@ -1,27 +1,34 @@
 import {
   AppBar, Container, Tab, Tabs,
 } from '@material-ui/core';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useQuery } from '@apollo/client';
 import useStyles from './styles';
-import { RoomContext } from '../../context/RoomContext';
+import { ROOM } from '../../utils/queries/createRoomQuery';
+import { Loading } from '../Loading';
 
 export const TabComponent = () => {
   const classes = useStyles();
   const router = useRouter();
   const { id } = router.query;
   const [selectedTab, setSelectedTab] = useState(0);
-  const [open, setOpen] = useState(false);
-  const { room } = useContext(RoomContext);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  const {
+    error, loading,
+    data: { roomPerWorkspace } = {},
+  } = useQuery(ROOM, {
+    fetchPolicy: 'cache-and-network',
+    pollInterval: 5000,
+    variables: {
+      workspaceId: id,
+    },
+  });
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  if (error) {
+    <Loading />;
+  }
 
   const handleSelectedTab = (e, newValue) => {
     setSelectedTab(newValue);
@@ -44,11 +51,11 @@ export const TabComponent = () => {
             <Link href={`/workspace/${id}/workspaceMembers`}>
               <Tab value={1} label="Membros do workspace" />
             </Link>
-            {room.id
+            {roomPerWorkspace
 
             && (
-            <Link href={`/workspace/${id}/room/${room.id}`}>
-              <Tab value={2} label="Sala de bate-papo" onClick={handleOpen} />
+            <Link href={`/workspace/${id}/room/${roomPerWorkspace.id}`}>
+              <Tab value={2} label="Sala de bate-papo" />
             </Link>
             )}
           </Tabs>

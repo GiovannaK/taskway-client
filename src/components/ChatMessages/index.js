@@ -137,8 +137,8 @@ export const ChatMessage = () => {
                   messages && messages.length ? (
                     messages.map((message) => (
 
-                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                        <Card variant="outlined" className={classes.messageCard}>
+                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12} key={message.id}>
+                        <Card variant="outlined" className={classes.messageCard} key={message.id}>
                           <CardContent>
                             <Box display="flex" alignItems="center">
                               <Avatar
