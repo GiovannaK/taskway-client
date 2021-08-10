@@ -24,6 +24,7 @@ import { QUERY_USERS_PERMISSIONS } from '../../../utils/queries/queryUsersPermis
 import withAuth from '../../../utils/withAuth';
 import withAuthAndIsOwner from '../../../utils/withAuthAndIsOwner';
 import { RemoveWorkspace } from '../../../components/permissions/removeWorkspace/removeWorkspace';
+import { CreateChatRoom } from '../../../components/createChatRoom';
 
 const DELETE_PERMISSIONS = gql`
   mutation removeUserPermission($workspaceId: ID!, $userId: ID!, $permissionId: ID!) {
@@ -177,6 +178,9 @@ const permissions = () => {
                   )}
               </Grid>
               <Grid item xs={12} sm={12} md={10} lg={6} xl={6}>
+                <CreateChatRoom />
+              </Grid>
+              <Grid item xs={12} sm={12} md={10} lg={12} xl={12}>
                 <AddPermissionForm />
               </Grid>
             </Grid>

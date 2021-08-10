@@ -8,6 +8,7 @@ import theme from '../theme';
 import { client } from '../services/ApolloClient';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { ProfileProvider } from '../context/ProfileContext';
+import { RoomProvider } from '../context/RoomContext';
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
@@ -29,19 +30,21 @@ export default function MyApp(props) {
       <ApolloProvider client={client}>
         <ThemeProvider theme={theme}>
           <ProfileProvider>
-            <CssBaseline />
-            <Component {...pageProps} />
-            <ToastContainer
-              position="bottom-left"
-              autoClose={3000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
+            <RoomProvider>
+              <CssBaseline />
+              <Component {...pageProps} />
+              <ToastContainer
+                position="bottom-left"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
+            </RoomProvider>
           </ProfileProvider>
         </ThemeProvider>
       </ApolloProvider>
