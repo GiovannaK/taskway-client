@@ -40,7 +40,7 @@
 # Features
 
 ## PROGRESSIVE WEB APP
-- This application has PWA functionalitites
+- This application has PWA features
 
 ## WORKSPACES
 
