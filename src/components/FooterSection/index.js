@@ -23,23 +23,6 @@ export const FooterSection = () => {
             <img src="instagram.svg" alt="instagram logo" className={classes.socialLogo} />
           </Box>
         </Box>
-        <Grid container align="center" justify="center">
-          <Grid item xs={2} sm={2} md={3} lg={3} xl={3}>
-            <Link href="!#" className={classes.textTypography}>
-              Sobre nós
-            </Link>
-          </Grid>
-          <Grid item xs={2} sm={2} md={3} lg={3} xl={3}>
-            <Link href="!#" className={classes.textTypography}>
-              Produtos
-            </Link>
-          </Grid>
-          <Grid item xs={2} sm={2} md={3} lg={3} xl={3}>
-            <Link href="!#" className={classes.textTypography}>
-              Newsletter
-            </Link>
-          </Grid>
-        </Grid>
       </Container>
     </Paper>
   );

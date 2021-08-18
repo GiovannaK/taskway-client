@@ -8,16 +8,16 @@ const useStyles = makeStyles((theme) => ({
     background: 'linear-gradient(to right, #141e30, #243b55)',
 
     [theme.breakpoints.down('xl')]: {
-      minHeight: '30vh',
+      minHeight: '20vh',
     },
     [theme.breakpoints.down('md')]: {
-      minHeight: '30vh',
+      minHeight: '20vh',
     },
     [theme.breakpoints.down('sm')]: {
-      minHeight: '30vh',
+      minHeight: '15vh',
     },
     [theme.breakpoints.down('xs')]: {
-      minHeight: '30vh',
+      minHeight: '15vh',
     },
   },
   title: {
