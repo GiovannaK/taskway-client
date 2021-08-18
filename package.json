@@ -32,6 +32,7 @@
     "react-intersection-observer": "^8.32.0",
     "react-scroll": "^1.8.3",
     "react-toastify": "^7.0.4",
+    "recharts": "^2.1.0",
     "subscriptions-transport-ws": "^0.9.19",
     "validator": "^13.6.0"
   },

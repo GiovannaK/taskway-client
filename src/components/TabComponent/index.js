@@ -58,6 +58,9 @@ export const TabComponent = () => {
               <Tab value={2} label="Sala de bate-papo" />
             </Link>
             )}
+            <Link href={`/workspace/${id}/dashboard`}>
+              <Tab value={3} label="Estatísticas" />
+            </Link>
           </Tabs>
         </Container>
       </AppBar>

@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Cookie from 'js-cookie';
 import { useQuery } from '@apollo/client';
+import { toast } from 'react-toastify';
 import { HAS_PERMISSION_TO_ACCESS } from './queries/hasPermissionToAccess';
 import { Loading } from '../components/Loading';
 import { IS_OWNER } from './queries/queryIsOwner';
@@ -31,6 +32,7 @@ export default function withAuthAndIsOwner(WrappedComponent) {
     useEffect(() => {
       if (isOwnerToAccess === false) {
         router.replace('/workspaces');
+        toast.error('Você precisa ser proprietário do workspace para acessar esta página');
       }
     }, [isOwnerToAccess]);
 
