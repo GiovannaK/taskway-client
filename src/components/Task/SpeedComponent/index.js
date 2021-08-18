@@ -26,6 +26,7 @@ import { updateTaskValidation } from '../../../utils/updateTaskValidation';
 import { DeleteDialog } from '../DeleteDialog';
 import 'moment/locale/pt-br';
 import { USERS_WORKSPACE } from '../../../utils/queries/queryUsersWorkspaces';
+import { TASK_SITUATION } from '../../../utils/queries/taskSituationQuery';
 
 const UPLOAD_FILE = gql`
   mutation taskSingleUpload($id: ID!, $file: Upload!, $workspaceId: ID!) {
@@ -97,6 +98,12 @@ export const SpeedComponent = ({
         variables: {
           workspaceId: id,
           id: taskId,
+        },
+      },
+      {
+        query: TASK_SITUATION,
+        variables: {
+          workspaceId: id,
         },
       },
     ],

@@ -14,16 +14,8 @@ import { PaperComponent } from '../../../components/PaperComponent';
 import { TabComponent } from '../../../components/TabComponent';
 import { TopBar } from '../../../components/TopBar';
 import useStyles from '../../../styles/dashboard';
+import { TASK_SITUATION } from '../../../utils/queries/taskSituationQuery';
 import withAuthAndIsOwner from '../../../utils/withAuthAndIsOwner';
-
-const TASK_SITUATION = gql`
-  query tasksSituation($workspaceId: ID!){
-  tasksSituation(workspaceId: $workspaceId){
-    progress
-    count
-  }
-}
-`;
 
 const dashboard = () => {
   const classes = useStyles();

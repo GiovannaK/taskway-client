@@ -32,6 +32,7 @@ import { TaskCard } from '../../../components/Task/TaskCard';
 import { QUERY_TASKS } from '../../../utils/queries/queryTasks';
 import { USERS_WORKSPACE } from '../../../utils/queries/queryUsersWorkspaces';
 import withAuthAndPermission from '../../../utils/withAuthAndPermissions';
+import { TASK_SITUATION } from '../../../utils/queries/taskSituationQuery';
 
 const CREATE_TASK = gql`
   mutation createTask($workspaceId: ID! $title: String! $link: String $description: String! $maxDate: String $priority: String $assignTo: ID!) {
@@ -104,6 +105,12 @@ const createTask = () => {
           priority: '',
           assignTo: '',
           maxDate: '',
+        },
+      },
+      {
+        query: TASK_SITUATION,
+        variables: {
+          workspaceId: id,
         },
       },
     ],
