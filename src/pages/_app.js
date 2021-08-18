@@ -25,6 +25,11 @@ export default function MyApp(props) {
       <Head>
         <title>Taskway | Colabore em tempo real</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+        <meta name="description" content="Colabore e gerencie tarefas em tempo real com Taskway gratuitamente." />
+        <meta property="og:title" content="Taskway | Colabore em tempo real" />
+        <meta property="og:description" content="Colabore e gerencie tarefas em tempo real com Taskway gratuitamente." />
+        <meta property="og:url" content="https://taskway-client.vercel.app/" />
+        <meta property="og:type" content="website" />
       </Head>
       <ApolloProvider client={client}>
         <ThemeProvider theme={theme}>
