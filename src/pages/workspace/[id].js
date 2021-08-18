@@ -113,7 +113,7 @@ const workspace = () => {
         <TabComponent />
         <Toolbar />
         {loading ? (<Loading />) : (
-          <Box pt={10}>
+          <Box pt={5}>
             <Grid container spacing={2} align="center" justify="center">
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <Card className={classes.card} variant="outlined">
