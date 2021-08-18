@@ -42,6 +42,8 @@
 ## PROGRESSIVE WEB APP
 - This application has PWA features
 
+![Project Image](public/workspace_pwa.jpg)
+
 ## WORKSPACES
 
 - Users can create workspaces.
