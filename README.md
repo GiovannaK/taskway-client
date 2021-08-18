@@ -13,6 +13,7 @@
 ![Project Image](public/tasks.png)
 ![Project Image](public/task.png)
 ![Project Image](public/members.png)
+![Project Image](public/dashboard.png)
 ![Project Image](public/login.png)
 
 <p align="center">
@@ -37,6 +38,9 @@
 - Material UI
 
 # Features
+
+## PROGRESSIVE WEB APP
+- This application has PWA features
 
 ## WORKSPACES
 
