@@ -65,23 +65,6 @@ export const Navbar = ({ openDrawer, setOpenDrawer, logoutUser }) => {
         <List>
           <ListItem button>
             <ListItemIcon>
-              <SettingsIcon className={classes.listIcons} />
-            </ListItemIcon>
-            <ListItemText>
-              <Typography
-                variant="h6"
-                color="primary"
-                className={classes.typography}
-              >
-                Configurações
-              </Typography>
-            </ListItemText>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem button>
-            <ListItemIcon>
               <ExitToAppIcon className={classes.listIcons} />
             </ListItemIcon>
             <ListItemText onClick={logoutUser}>

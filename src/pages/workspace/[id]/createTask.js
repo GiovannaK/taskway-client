@@ -33,6 +33,7 @@ import { QUERY_TASKS } from '../../../utils/queries/queryTasks';
 import { USERS_WORKSPACE } from '../../../utils/queries/queryUsersWorkspaces';
 import withAuthAndPermission from '../../../utils/withAuthAndPermissions';
 import { TASK_SITUATION } from '../../../utils/queries/taskSituationQuery';
+import { TabComponent } from '../../../components/TabComponent';
 
 const CREATE_TASK = gql`
   mutation createTask($workspaceId: ID! $title: String! $link: String $description: String! $maxDate: String $priority: String $assignTo: ID!) {
@@ -146,7 +147,8 @@ const createTask = () => {
     <PaperComponent>
       <TopBar />
       <Layout title="Taskway | Criar Tarefa">
-        <Box pt={8}>
+        <TabComponent />
+        <Box pt={12}>
           <Grid container align="center" justify="center">
             <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
               <Card className={classes.card} variant="outlined">

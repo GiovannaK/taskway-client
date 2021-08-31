@@ -25,6 +25,7 @@ import withAuth from '../../../utils/withAuth';
 import withAuthAndIsOwner from '../../../utils/withAuthAndIsOwner';
 import { RemoveWorkspace } from '../../../components/permissions/removeWorkspace/removeWorkspace';
 import { CreateChatRoom } from '../../../components/createChatRoom';
+import { TabComponent } from '../../../components/TabComponent';
 
 const DELETE_PERMISSIONS = gql`
   mutation removeUserPermission($workspaceId: ID!, $userId: ID!, $permissionId: ID!) {
@@ -105,7 +106,8 @@ const permissions = () => {
       <PaperComponent>
         <TopBar />
         <Layout>
-          <Box pt={10}>
+          <TabComponent />
+          <Box pt={12}>
             <Grid container spacing={1} justify="center">
               <Grid item xs={12} sm={12} md={10} lg={6} xl={6}>
                 {!usersPermissions

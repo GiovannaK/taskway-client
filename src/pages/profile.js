@@ -26,7 +26,6 @@ const profile = () => {
             <Toolbar />
             <Grid container spacing={1}>
               <ProfileEditForm />
-              <ProfileSection />
             </Grid>
           </Box>
         </Layout>

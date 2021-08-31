@@ -14,6 +14,7 @@ import { CommentsCard } from '../../../components/Task/CommentsCard';
 import { SpeedComponent } from '../../../components/Task/SpeedComponent';
 import { Loading } from '../../../components/Loading';
 import withAuthAndPermission from '../../../utils/withAuthAndPermissions';
+import { TabComponent } from '../../../components/TabComponent';
 
 export const QUERY_TASKS_BY_ID = gql`
   query taskById($workspaceId: ID!, $id: ID!){
@@ -61,7 +62,8 @@ const task = () => {
     <PaperComponent>
       <TopBar />
       <Layout title="Taskway | Tarefa">
-        <Box pt={10}>
+        <TabComponent />
+        <Box pt={12}>
           {loading ? (
             <Loading />
           ) : (
