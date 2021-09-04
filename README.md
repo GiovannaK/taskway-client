@@ -5,8 +5,8 @@
 ## Server Repository: https://github.com/GiovannaK/taskway
 
 ### Demo Credentials
-- E-MAIL: 
-- PASSWORD: 
+- E-MAIL: demo@cloud-mail.top
+- PASSWORD: taskway1
 ---
 
 ![Project Image](public/home.png)
