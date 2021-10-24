@@ -4,8 +4,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     textTransform: 'uppercase',
     fontWeight: 'bold',
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(4),
+    paddingBottom: theme.spacing(3),
     color: theme.palette.primary.main,
   },
   card: {
@@ -43,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
   svgButton: {
     width: '50%',
     maxHeight: '20%',
+  },
+  credential: {
+    color: theme.palette.secondary.dark,
   },
 }));
 

@@ -32,6 +32,14 @@ const login = () => {
     password: '',
   });
 
+  const setCredentials = () => {
+    setVariables({
+      ...variables,
+      email: 'demo@cloud-mail.top',
+      password: 'taskway1',
+    });
+  };
+
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(_, __) {
       Cookie.set('isLogged', true, {
@@ -85,6 +93,13 @@ const login = () => {
                   >
                     Login
                   </Typography>
+                  <Button
+                    className={classes.credential}
+                    onClick={setCredentials}
+                  >
+                    Credenciais demo
+
+                  </Button>
                   <form onSubmit={onSubmit}>
                     <TextField
                       required
