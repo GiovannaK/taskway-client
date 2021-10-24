@@ -74,7 +74,7 @@ export const HeroSection = () => {
               <img src="laptop.png" alt="laptop" className={classes.laptop} />
             </motion.div>
           </Box>
-          <Hidden mdDown>
+          <Hidden lgDown>
             <img src="wave.svg" alt="wave" className={classes.waveSvg} />
           </Hidden>
         </Box>
