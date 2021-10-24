@@ -1,11 +1,12 @@
 # 📃 Taskway Client
 
-## See preview here: https://taskway-client.vercel.app/
+## See preview here: https://taskway.tk/
 ## See API docs here: https://taskwayservice.herokuapp.com/
+## Server Repository: https://github.com/GiovannaK/taskway
 
 ### Demo Credentials
-- E-MAIL: 
-- PASSWORD: 
+- E-MAIL: demo@cloud-mail.top
+- PASSWORD: taskway1
 ---
 
 ![Project Image](public/home.png)
