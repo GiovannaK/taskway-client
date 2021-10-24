@@ -124,7 +124,7 @@ const login = () => {
                         {loading ? 'Carregando...' : 'Login'}
                       </Typography>
                     </Button>
-                    <Hidden smDown>
+                    <Hidden lgDown>
                       <Toolbar />
                       <img src="task.svg" alt="task" className={classes.svgButton} />
                     </Hidden>
