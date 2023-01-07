@@ -1,7 +1,6 @@
 # 📃 Taskway Client
 
 ## See preview here: https://taskway.tk/
-## See API docs here: https://taskwayservice.herokuapp.com/
 ## Server Repository: https://github.com/GiovannaK/taskway
 
 ### Demo Credentials
